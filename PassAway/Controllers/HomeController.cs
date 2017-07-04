@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace PassAway.Controllers {
     public class HomeController : Controller {
-        public ActionResult Index() {vgiiygviyfyfiyiffy 
+        public ActionResult Index() {
             return View();
         }
 
