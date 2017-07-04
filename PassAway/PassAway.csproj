@@ -184,6 +184,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\Staff\UpdateProduct.cshtml" />
+    <Content Include="Views\Staff\AssignPromo.cshtml" />
+    <Content Include="Views\Home\Customer\PersonalProfile.cshtml" />
+    <Content Include="Views\Home\Customer\UpdatePersonalProfile.cshtml" />
+    <Content Include="Views\Home\Customer\DisplayProducts.cshtml" />
+    <Content Include="Views\Home\Customer\PurchaseProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -218,7 +226,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58043</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
