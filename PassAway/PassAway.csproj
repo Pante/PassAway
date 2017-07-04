@@ -141,6 +141,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,10 +189,11 @@
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Staff\UpdateProduct.cshtml" />
     <Content Include="Views\Staff\AssignPromo.cshtml" />
-    <Content Include="Views\Home\Customer\PersonalProfile.cshtml" />
-    <Content Include="Views\Home\Customer\UpdatePersonalProfile.cshtml" />
-    <Content Include="Views\Home\Customer\DisplayProducts.cshtml" />
-    <Content Include="Views\Home\Customer\PurchaseProducts.cshtml" />
+    <Content Include="Views\Customer\PersonalProfile.cshtml" />
+    <Content Include="Views\Customer\UpdatePersonalProfile.cshtml" />
+    <Content Include="Views\Customer\DisplayProducts.cshtml" />
+    <Content Include="Views\Customer\PurchaseProducts.cshtml" />
+    <Content Include="Views\Customer\CustomerIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
