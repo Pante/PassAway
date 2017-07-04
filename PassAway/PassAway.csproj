@@ -141,7 +141,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,13 +186,27 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
-    <Content Include="Views\Staff\UpdateProduct.cshtml" />
-    <Content Include="Views\Staff\AssignPromo.cshtml" />
-    <Content Include="Views\Customer\PersonalProfile.cshtml" />
-    <Content Include="Views\Customer\UpdatePersonalProfile.cshtml" />
-    <Content Include="Views\Customer\DisplayProducts.cshtml" />
-    <Content Include="Views\Customer\PurchaseProducts.cshtml" />
-    <Content Include="Views\Customer\CustomerIndex.cshtml" />
+    <Content Include="Views\Home\Staff\UpdateProduct.cshtml">
+      <BrowseToURL>~/Home/UpdateProduct.cshtml</BrowseToURL>
+    </Content>
+    <Content Include="Views\Home\Staff\AssignPromo.cshtml">
+      <BrowseToURL>~/Home/AssignPromo.cshtml</BrowseToURL>
+    </Content>
+    <Content Include="Views\Home\Customer\PersonalProfile.cshtml">
+      <BrowseToURL>~/Home/PersonalProfile.cshtml</BrowseToURL>
+    </Content>
+    <Content Include="Views\Home\Customer\UpdatePersonalProfile.cshtml">
+      <BrowseToURL>~/Home/UpdatePersonalProfile.cshtml</BrowseToURL>
+    </Content>
+    <Content Include="Views\Home\Customer\DisplayProducts.cshtml">
+      <BrowseToURL>~/Home/DisplayProducts</BrowseToURL>
+    </Content>
+    <Content Include="Views\Home\Customer\PurchaseProducts.cshtml">
+      <BrowseToURL>~/Home/PurchaseProducts.cshtml</BrowseToURL>
+    </Content>
+    <Content Include="Views\Home\Customer\CustomerIndex.cshtml">
+      <BrowseToURL>~/Home/CustomerIndex</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
