@@ -8,8 +8,12 @@ html {
 
 body {
     background: #FAE5D3;
+    background-image: url('../Images/469902360.jpg');
+    background-repeat:no-repeat;
+    background-position: left top;
     font-family: 'Titillium Web', sans-serif;
     padding-top: 40px;
+    background-size: cover;
 }
 
 a {
@@ -177,8 +181,6 @@ textarea {
   text-align: right;
 }
 
-winecollection
-{
-    max-width: 100%;
-    max-height: 100%;
+title{
+    color:aliceblue;
 }
