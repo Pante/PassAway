@@ -45,12 +45,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Repository, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Entity.Repository.2.0.0.1\lib\net45\System.Data.Entity.Repository.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -141,10 +148,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\IRepository.cs" />
+    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Register.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,33 +200,30 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Staff\UpdateProduct.cshtml">
       <BrowseToURL>~/Home/UpdateProduct.cshtml</BrowseToURL>
     </Content>
     <Content Include="Views\Home\Staff\AssignPromo.cshtml">
       <BrowseToURL>~/Home/AssignPromo.cshtml</BrowseToURL>
     </Content>
-    <Content Include="Views\Home\Customer\PersonalProfile.cshtml">
+    <Content Include="Views\Customer\PersonalProfile.cshtml">
       <BrowseToURL>~/Home/PersonalProfile.cshtml</BrowseToURL>
     </Content>
-    <Content Include="Views\Home\Customer\UpdatePersonalProfile.cshtml">
+    <Content Include="Views\Customer\UpdatePersonalProfile.cshtml">
       <BrowseToURL>~/Home/UpdatePersonalProfile.cshtml</BrowseToURL>
     </Content>
-    <Content Include="Views\Home\Customer\DisplayProducts.cshtml">
+    <Content Include="Views\Customer\DisplayProducts.cshtml">
       <BrowseToURL>~/Home/DisplayProducts</BrowseToURL>
     </Content>
-    <Content Include="Views\Home\Customer\PurchaseProducts.cshtml">
+    <Content Include="Views\Customer\PurchaseProducts.cshtml">
       <BrowseToURL>~/Home/PurchaseProducts.cshtml</BrowseToURL>
     </Content>
-    <Content Include="Views\Home\Customer\CustomerIndex.cshtml">
-      <BrowseToURL>~/Home/CustomerIndex</BrowseToURL>
-    </Content>
+    <None Include="Views\Customer\CustomerIndex.cshtml">
+      <BrowseToURL>~/Home/Customer/CustomerIndex</BrowseToURL>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

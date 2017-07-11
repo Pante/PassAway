@@ -31,5 +31,10 @@ namespace PassAway.Controllers {
         {
             return View();
         }
+
+        public ActionResult CustomerIndex()
+        {
+            return View();
+        }
     }
 }
