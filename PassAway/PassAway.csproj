@@ -159,14 +159,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IRepository.cs" />
     <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Register.cs" />
-    <Compile Include="Models\Repository.cs" />
-    <Compile Include="Models\Staff.cs" />
-    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

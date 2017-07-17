@@ -8,7 +8,7 @@ namespace PassAway.Models
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Staff> Staff { get; set; }
-        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Login> LoginRegisters { get; set; }
+        public DbSet<Register> RegisterRecords { get; set; }
     }
 }

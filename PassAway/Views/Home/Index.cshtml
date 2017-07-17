@@ -15,6 +15,7 @@
     
 </head>
 <body>
+
     <div>
         <div class="form">
             <ul class="tab-group">
@@ -26,20 +27,20 @@
                 <div id="login">
                     <h1>Welcome Back!</h1>
 
-                    <form asp-action="login" method="post">
+                    <form action="/" method="post">
 
                         <div class="field-wrap">
-                            <label asp-for="Email">
+                            <label>
                                 Email Address<span class="req">*</span>
                             </label>
-                            <input asp-for="Email" type="email" required autocomplete="off" />
+                            <input type="email" required autocomplete="off" />
                         </div>
 
                         <div class="field-wrap">
-                            <label asp-for="Password">
+                            <label>
                                 Password<span class="req">*</span>
                             </label>
-                            <input asp-for="Password" type="password" required autocomplete="off" />
+                            <input type="password" required autocomplete="off" />
                         </div>
 
                         <p class="forgot"><a href="#">Forgot Password?</a></p>
@@ -53,35 +54,35 @@
                 <div id="register">
                     <h1>Register</h1>
 
-                    <form asp-action="register" method="post">
+                    <form action="/" method="post">
 
                         <div class="top-row">
                             <div class="field-wrap">
-                                <label asp-for="Firstname">
+                                <label>
                                     First Name<span class="req">*</span>
                                 </label>
-                                <input asp-for="Firstname" type="text" required autocomplete="off" />
+                                <input type="text" required autocomplete="off" />
                             </div>
 
                             <div class="field-wrap">
-                                <label asp-for="Lastname">
+                                <label>
                                     Last Name<span class="req">*</span>
                                 </label>
-                                <input asp-for="Lastname" type="text" required autocomplete="off" />
+                                <input type="text" required autocomplete="off" />
                             </div>
                         </div>
                         <div class="field-wrap">
-                            <label asp-for="Email">
+                            <label>
                                 Email Address<span class="req">*</span>
                             </label>
-                            <input asp-for="Email" type="email" required autocomplete="off" />
+                            <input type="email" required autocomplete="off" />
                         </div>
 
                         <div class="field-wrap">
-                            <label asp-for="Password">
+                            <label>
                                 Set A Password<span class="req">*</span>
                             </label>
-                            <input asp-for="Password" type="password" required autocomplete="off" />
+                            <input type="password" required autocomplete="off" />
                         </div>
 
                         <button type="submit" class="button button-block" />Get Started</button>
