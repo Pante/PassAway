@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace PassAway.Models.Shared {
     public class ProductRepository {
@@ -17,4 +17,5 @@ namespace PassAway.Models.Shared {
         public IEnumerable<Product> Products => context.Products;
 
     }
+
 }

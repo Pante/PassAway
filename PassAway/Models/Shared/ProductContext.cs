@@ -2,14 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace PassAway.Models.Shared {
     public class ProductContext : DbContext {
 
-        public ProductContext(DbContextOptions<ProductContext> options) : base(options) { }
+        public ProductContext(DbContextOptions<ProductContext> options) : base(options) {
+
+        }
+
 
         public DbSet<Product> Products { get; set; }
 
     }
+
 }
