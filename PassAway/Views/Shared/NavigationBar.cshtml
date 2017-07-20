@@ -1,0 +1,11 @@
+﻿@model IEnumerable<PassAway.Models.Shared.ElementViewModel>
+
+<nav>
+    <ul class=" ">
+        @foreach (var item in Model) {
+            <li>
+                <a href="@item.URL">@item.Name</a>
+            </li>
+        }
+    </ul>
+</nav>

@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 namespace PassAway.Models.Identities {
     public class User : IdentityUser<Guid> {
 
+        public enum Gender { Male, Female }
+
         public Gender Gender { get; set; }
         public DateTime DOB { get; set; }
         public string Country { get; set; }
         public string Address { get; set; }
-
-    }
-
-
-    public enum Gender {
-
-        MALE, FEMALE;
 
     }
 
