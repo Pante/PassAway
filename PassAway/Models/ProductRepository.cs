@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 namespace PassAway.Models.Shared {
     public class ProductRepository {
 
-        private ProductContext context;
+        private ApplicationContext context;
 
 
-        public ProductRepository(ProductContext context) {
+        public ProductRepository(ApplicationContext context) {
             this.context = context;
         }
 

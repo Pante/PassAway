@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PassAway.Models.Shared {
+namespace PassAway.Models.ViewModels {
     public class ElementViewModel {
 
         public string Name { get; set; }

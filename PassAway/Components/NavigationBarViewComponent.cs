@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PassAway.Models.Shared;
+using PassAway.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

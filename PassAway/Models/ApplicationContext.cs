@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace PassAway.Models.Shared {
-    public class ProductContext : DbContext {
+    public class ApplicationContext : DbContext {
 
-        public ProductContext(DbContextOptions<ProductContext> options) : base(options) {
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) {
 
         }
 

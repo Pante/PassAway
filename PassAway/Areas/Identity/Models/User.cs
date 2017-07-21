@@ -5,9 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace PassAway.Models.Identities {
-    public class User : IdentityUser<Guid> {
 
-        public enum Gender { Male, Female }
+    public enum Gender { Male, Female }
+
+    public class User : IdentityUser<Guid> {
 
         public Gender Gender { get; set; }
         public DateTime DOB { get; set; }
