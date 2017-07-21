@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace PassAway.Components {
 
-    public class CartViewComponent : ViewComponent {
+    public class CartSummaryViewComponent : ViewComponent {
 
         private Cart cart;
 
 
-        public CartViewComponent(Cart cart) {
+        public CartSummaryViewComponent(Cart cart) {
             this.cart = cart;
         }
 
