@@ -34,19 +34,9 @@ namespace PassAway {
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
-            if (env.IsDevelopment()) {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-
-            } else {
-                app.UseExceptionHandler("/Home/Error");
-            }
-
+            app.UseDeveloperExceptionPage();
+            app.UseStatusCodePages();
             app.UseStaticFiles();
-
             app.UseMvc(routes => 
                 routes.MapRoute(
                     name: "default",

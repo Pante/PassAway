@@ -22,7 +22,7 @@
 
                 <td>
                     <form asp-action="Remove" method="post">
-                        <input type="hidden" name="ProductID" value="@item.Product.ProductID" />
+                        <input type="hidden" name="ProductID" value="@item.Product.ID" />
 
                         <input type="hidden" name="URL" value="@Model.URL" />
 
@@ -38,7 +38,7 @@
         <tr>
             <td colspan="3" class="text-right">Total:</td>
             <td class="text-right">
-                @Model.Cart.GetTotalValue().ToString("c")
+                @Model.Cart.GetTotalPrice().ToString("c")
             </td>
         </tr>
     </tfoot>
