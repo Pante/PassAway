@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using PassAway.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-
+using System.Linq;
+using PassAway.Models.Shared;
 
 namespace PassAway.Controllers
 {
@@ -80,7 +81,7 @@ namespace PassAway.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, string email,
+        public async Task<IActionResult> EditUser(string id, string email,
         string password)
         {
             AppUser user = await userManager.FindByIdAsync(id);
@@ -131,6 +132,8 @@ namespace PassAway.Controllers
             }
             return View(user);
         }
+
+
         private void AddErrorsFromResult(IdentityResult result)
         {
             foreach (IdentityError error in result.Errors)
@@ -138,5 +141,39 @@ namespace PassAway.Controllers
                 ModelState.AddModelError("", error.Description);
             }
         }
+
+        
+
+        private ProductRepository repository;
+
+        public AdminController(ProductRepository repo)
+        {
+            repository = repo;
+        }
+
+        public ViewResult Product() => View(repository.Products);
+
+        public ViewResult EditProduct(int productId) =>
+            View(repository.Products
+            .FirstOrDefault(p => p.ID == productId));
+
+
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveProduct(product);
+                TempData["message"] = $"{product.Name} has been saved";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // there is something wrong with the data values
+                return View(product);
+            }
+        }
+
     }
+
 }

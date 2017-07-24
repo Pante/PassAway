@@ -18,9 +18,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PassAway {
     public class Startup {
-
         public IConfigurationRoot Configuration { get; }
-
 
         public Startup(IHostingEnvironment env) {
             var builder = new ConfigurationBuilder()
@@ -73,7 +71,5 @@ namespace PassAway {
             AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
                 Configuration).Wait();
         }
-
     }
-
 }
