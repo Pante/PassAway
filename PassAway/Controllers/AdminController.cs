@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PassAway.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private IUserValidator<AppUser> userValidator;
