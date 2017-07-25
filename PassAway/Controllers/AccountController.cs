@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PassAway.Models;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Reflection;
+using PassAway.Models.Identities;
 
 namespace PassAway.Controllers
 {
@@ -80,7 +83,16 @@ namespace PassAway.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email };
+                var user = new AppUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Country = model.Country,
+                    Address = model.Address,
+                    Gender = getGender(model.Gender),
+                    DOB = Convert.ToDateTime(model.DOB)
+
+                };
                 var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -97,5 +109,21 @@ namespace PassAway.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        
+        public Models.Gender getGender(string gender)
+        {
+            Models.Gender genderEnum = Models.Gender.M;
+            if (gender == "M")
+            {
+                genderEnum = Models.Gender.M;
+            }
+            else if (gender == "F")
+            {
+                genderEnum = Models.Gender.F;
+            }
+
+            return genderEnum;
+        }
+
     }
 }

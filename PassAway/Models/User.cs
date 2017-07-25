@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 namespace PassAway.Models
 {
 
-    public enum Gender { Male, Female }
+    public enum Gender { M, F }
 
     public class AppUser : IdentityUser
     {
