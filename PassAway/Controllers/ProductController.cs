@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using PassAway.Models.Shared;
 using PassAway.Models.ViewModels;
 using PassAway.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PassAway.Controllers {
 
+    [AllowAnonymous]
     public class ProductController : Controller {
 
         private ProductRepository repository;
