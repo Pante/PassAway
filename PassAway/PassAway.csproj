@@ -7,6 +7,23 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\**" />
+    <Content Remove="Extensions\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <None Remove="Extensions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\css\HomeStyles.min.css" />
+    <Content Include="wwwroot\css\LoginStyle.css" />
+    <Content Include="wwwroot\images\1.jpg" />
+    <Content Include="wwwroot\images\2.jpg" />
+    <Content Include="wwwroot\images\3.jpg" />
+    <Content Include="wwwroot\images\High Tech Wallpaper.jpg" />
+    <Content Include="wwwroot\images\HomePage BG.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     
@@ -35,7 +52,6 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
 

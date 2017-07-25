@@ -68,8 +68,8 @@ namespace PassAway {
                     template: "{controller=Home}/{action=Login}/{id?}"
                 )
             );
-            AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
-                Configuration).Wait();
+            /*AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
+                Configuration).Wait();*/
         }
     }
 }

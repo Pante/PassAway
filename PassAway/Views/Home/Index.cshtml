@@ -2,7 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+
+<!--<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -105,4 +106,48 @@
             <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
         </ul>
     </div>
+</div>-->
+<style type="text/css">
+    @section Styles {
+    <link href="@Url.Content("~/css/HomeStyles.min.css")" rel="stylesheet" type="text/css" />
+}
+</style>
+<div class="team-boxed" style="background-color:rgba(238,244,247,0);background-image:url('/images/HomePage BG.jpg');background-size:cover;">
+    <div class="container" style="background-color:rgba(128,111,111,0.5);">
+        <div class="intro">
+            <h2 class="text-center" style="font-size:34px;color:rgb(213,216,220);margin-top:100px;">Our Wine Team</h2>
+            <p class="text-center" style="color:rgb(218,218,218);margin-bottom:32px;background-color:rgba(0,0,0,0.0980392);">More than 300 years of excellence in producing wine products, we strive to serve customers with only the best.</p>
+        </div>
+        <div class="row people">
+            <div class="col-md-4 col-sm-6 item">
+                <div class="box" style="background-color:rgba(150,110,79,0.71);">
+                    <img class="img-circle" src="~/images/1.jpg">
+                    <h3 class="name" style="color:rgb(46,49,52);">Ben Johnson</h3>
+                    <p class="title">Company Director</p>
+                    <p class="description" style="color:rgb(252,252,252);">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
+                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 item">
+                <div class="box" style="background-color:rgba(150,110,79,0.71);">
+                    <img class="img-circle" src="~/images/2.jpg">
+                    <h3 class="name">Emily Clark</h3>
+                    <p class="title">Beer Artist</p>
+                    <p class="description" style="color:rgb(248,250,251);">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
+                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 item">
+                <div class="box" style="background-color:rgba(150,110,79,0.71);">
+                    <img class="img-circle" src="~/images/3.jpg">
+                    <h3 class="name">Carl Kent</h3>
+                    <p class="title">Wine Stylist</p>
+                    <p class="description" style="color:rgb(247,249,251);">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
+                    <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
