@@ -1,37 +1,37 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using PassAway.Models;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace PassAway.Infrastructure
-{
-    public class CustomPasswordValidator : PasswordValidator<AppUser>
-    {
-        public override async Task<IdentityResult> ValidateAsync(
-        UserManager<AppUser> manager, AppUser user, string password)
-        {
-            IdentityResult result = await base.ValidateAsync(manager,
-            user, password);
-            List<IdentityError> errors = result.Succeeded ?
-            new List<IdentityError>() : result.Errors.ToList(); if (password.ToLower().Contains(user.UserName.ToLower()))
-            {
-                errors.Add(new IdentityError
-                {
+using PassAway.Models;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace PassAway.Infrastructure {
+
+    public class CustomPasswordValidator : PasswordValidator<User> {
+
+        public override async Task<IdentityResult> ValidateAsync(UserManager<User> users, User user, string password) {
+            var result = await base.ValidateAsync(users, user, password);
+            var errors = result.Succeeded ? new List<IdentityError>() : result.Errors.ToList();
+
+            if (password.ToLower().Contains(user.UserName.ToLower())) {
+                errors.Add(new IdentityError {
                     Code = "PasswordContainsUserName",
                     Description = "Password cannot contain username"
                 });
             }
-            if (password.Contains("12345"))
-            {
-                errors.Add(new IdentityError
-                {
-                    Code = "PasswordContainsSequence",
-                    Description = "Password cannot contain numeric sequence"
+
+            if (!Regex.IsMatch(password, @"^[a-zA-Z0-9]+$")) {
+                errors.Add(new IdentityError {
+                    Code = "PasswordInvalidCharacter",
+                    Description = "Password can only contains letters and numbers"
                 });
             }
-            return errors.Count == 0 ? IdentityResult.Success
-            : IdentityResult.Failed(errors.ToArray());
+
+            return errors.Count == 0 ? IdentityResult.Success: IdentityResult.Failed(errors.ToArray());
         }
+
     }
+
 }

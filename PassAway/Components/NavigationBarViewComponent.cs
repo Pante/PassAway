@@ -5,10 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using PassAway.Models;
 using PassAway.Models.ViewModels;
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace PassAway.Components {
 
@@ -16,10 +14,10 @@ namespace PassAway.Components {
     public class NavigationBarViewComponent : ViewComponent {
 
         private IElementViewModelRepository repository;
-        private UserManager<AppUser> users;
+        private UserManager<User> users;
  
 
-        public NavigationBarViewComponent(IElementViewModelRepository repository, UserManager<AppUser> users) {
+        public NavigationBarViewComponent(IElementViewModelRepository repository, UserManager<User> users) {
             this.repository = repository;
             this.users = users;
         }

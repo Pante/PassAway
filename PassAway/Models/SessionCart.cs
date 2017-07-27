@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using PassAway.Utility;
+using PassAway.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -30,17 +30,17 @@ namespace PassAway {
         }
 
         public void ConfigureServices(IServiceCollection services) {
-            services.AddTransient<IPasswordValidator<AppUser>,
+            services.AddTransient<IPasswordValidator<User>,
                 CustomPasswordValidator>();
-            services.AddTransient<IUserValidator<AppUser>, CustomUserValidator>();
+            services.AddTransient<IUserValidator<User>, CustomUserValidator>();
             services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseSqlServer(
             Configuration["Data:SportStoreIdentity:ConnectionString"]));
-                        services.AddIdentity<AppUser, IdentityRole>()
+                        services.AddIdentity<User, IdentityRole>()
                         .AddEntityFrameworkStores<AppIdentityDbContext>();
 
 
-            services.AddIdentity<AppUser, IdentityRole>(opts => {
+            services.AddIdentity<User, IdentityRole>(opts => {
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 6;
                 opts.Password.RequireNonAlphanumeric = false;

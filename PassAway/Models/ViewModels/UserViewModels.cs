@@ -29,8 +29,8 @@ namespace PassAway.Models
     public class RoleEditModel
     {
         public IdentityRole Role { get; set; }
-        public IEnumerable<AppUser> Members { get; set; }
-        public IEnumerable<AppUser> NonMembers { get; set; }
+        public IEnumerable<User> Members { get; set; }
+        public IEnumerable<User> NonMembers { get; set; }
     }
     public class RoleModificationModel
     {

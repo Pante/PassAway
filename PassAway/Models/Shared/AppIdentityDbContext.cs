@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace PassAway.Models
 {
 
-    public class AppIdentityDbContext : IdentityDbContext<AppUser>
+    public class AppIdentityDbContext : IdentityDbContext<User>
     {
 
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
@@ -19,8 +19,8 @@ namespace PassAway.Models
             IConfiguration configuration)
         {
 
-            UserManager<AppUser> userManager =
-                serviceProvider.GetRequiredService<UserManager<AppUser>>();
+            UserManager<User> userManager =
+                serviceProvider.GetRequiredService<UserManager<User>>();
             RoleManager<IdentityRole> roleManager =
                 serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -36,7 +36,7 @@ namespace PassAway.Models
                     await roleManager.CreateAsync(new IdentityRole(role));
                 }
 
-                AppUser user = new AppUser
+                User user = new User
                 {
                     UserName = username,
                     Email = email

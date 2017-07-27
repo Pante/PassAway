@@ -9,7 +9,23 @@ namespace PassAway.Models
 
     public enum Gender { M, F }
 
-    public class AppUser : IdentityUser
+    public static class Genders {
+
+        public static Gender FromString(string value) {
+            value = value.ToLower();
+            if (value == "m") {
+                return Gender.M;
+
+            } else {
+                return Gender.F;
+            }
+        }
+
+    }
+
+
+
+    public class User : IdentityUser
     {
 
         //public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser> customer)
