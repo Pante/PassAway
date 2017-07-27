@@ -91,7 +91,6 @@ namespace PassAway.Controllers
                     Address = model.Address,
                     Gender = getGender(model.Gender),
                     DOB = Convert.ToDateTime(model.DOB)
-
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
 
