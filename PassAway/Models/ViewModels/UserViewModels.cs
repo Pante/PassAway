@@ -43,7 +43,6 @@ namespace PassAway.Models
 
     public class RegisterModel
     {
-
         [Required]
         public string Name { get; set; }
         [Required]
@@ -53,8 +52,7 @@ namespace PassAway.Models
 
         [Required]
         public string Gender { get; set; }
-
-
+        
         [Required]
         public string DOB { get; set; }
         
@@ -64,4 +62,11 @@ namespace PassAway.Models
         [Required]
         public string Country { get; set; }
     }
+
+    public class ParentUsermodel
+    {
+        public RegisterModel register { get; set; }
+        public LoginModel  login { get; set; }
+    }
+
 }

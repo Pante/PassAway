@@ -8,6 +8,7 @@ using PassAway.Models;
 using System;
 using System.Threading.Tasks;
 
+
 namespace PassAway.Controllers {
 
     public class AccountController : Controller {
@@ -94,4 +95,5 @@ namespace PassAway.Controllers {
         }
 
     }
+
 }
