@@ -1,5 +1,6 @@
-﻿@model IEnumerable<AppUser>
-<!--<div class="bg-primary panel-body"><h4>User Accounts</h4></div>
+﻿@model IEnumerable<User>
+
+@*<div class="bg-primary panel-body"><h4>User Accounts</h4></div>
 <div class="text-danger" asp-validation-summary="ModelOnly"></div>
 <table class="table table-condensed table-bordered">
     <tr><th>ID</th><th>Name</th><th>Email</th></tr>
@@ -30,7 +31,7 @@
         }
     }
 </table>
-<a class="btn btn-primary" asp-action="Create">Create</a>-->
+<a class="btn btn-primary" asp-action="Create">Create</a>*@
 
 
 <body>
@@ -54,7 +55,7 @@
     }
     else
     {
-        @foreach (AppUser user in Model)
+        @foreach (User user in Model)
         {
             <div class="row clearmargin clearpadding row-image-txt">
                 <div class="col-xs-12 col-sm-6 col-md-6 clearmargin clearpadding col-sm-push-6" style="background-image:url(&quot;assets/img/office-front.jpeg&quot;);background-size:cover;height:400px;background-position:center;">
@@ -134,6 +135,7 @@
             </div>
         </div>
         }
+    }
     <footer>
         <div class="row">
             <div class="col-md-4 col-sm-6 footer-navigation">

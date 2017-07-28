@@ -4,13 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 using PassAway.Extensions;
 using PassAway.Models;
-<<<<<<< HEAD
 using PassAway.Models.Shared;
 
 using System.Linq;
-=======
 
->>>>>>> origin/master
 using System.Threading.Tasks;
 
 
@@ -81,7 +78,6 @@ namespace PassAway.Controllers {
                         user.PasswordHash = hash.HashPassword(user,
                         password);
                     } else {
-<<<<<<< HEAD
                         //AddErrorsFromResult(validPass);
                     }
                 }
@@ -95,13 +91,7 @@ namespace PassAway.Controllers {
                         //AddErrorsFromResult(result);
                     }
                 }
-
-
-=======
                         this.AddErrors(validPass);
-                    }
-                }
-
                 if ((validEmail.Succeeded && validPass == null) || (validEmail.Succeeded && password != string.Empty && validPass.Succeeded)) {
                     var result = await users.UpdateAsync(user);
                     if (result.Succeeded) {
@@ -111,8 +101,6 @@ namespace PassAway.Controllers {
                         this.AddErrors(result);
                     }
                 }
-
->>>>>>> origin/master
             } else {
                 ModelState.AddModelError("", "User Not Found");
             }

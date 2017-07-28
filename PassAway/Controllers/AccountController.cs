@@ -11,10 +11,8 @@ using System.Threading.Tasks;
 
 namespace PassAway.Controllers {
 
-<<<<<<< HEAD
-=======
     [Authorize(Roles = "Administrator")]
->>>>>>> origin/master
+
     public class AccountController : Controller {
 
         private UserManager<User> users;

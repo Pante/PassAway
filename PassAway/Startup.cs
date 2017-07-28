@@ -29,54 +29,50 @@ namespace PassAway {
             Configuration = builder.Build();
         }
 
-        public void ConfigureServices(IServiceCollection services) {
+        public void ConfigureServices(IServiceCollection services)
+        {
             services.AddTransient<IPasswordValidator<User>,
                 CustomPasswordValidator>();
             services.AddTransient<IUserValidator<User>, CustomUserValidator>();
             services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseSqlServer(
             Configuration["Data:SportStoreIdentity:ConnectionString"]));
-                        services.AddIdentity<User, IdentityRole>()
-                        .AddEntityFrameworkStores<AppIdentityDbContext>();
-<<<<<<< HEAD
-            services.AddIdentity<AppUser, IdentityRole>(opts => {
-=======
+            services.AddIdentity<User, IdentityRole>()
+            .AddEntityFrameworkStores<AppIdentityDbContext>();
 
 
-            services.AddIdentity<User, IdentityRole>(opts => {
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
-                opts.User.RequireUniqueEmail = true;
-                opts.Password.RequiredLength = 6;
-                opts.Password.RequireNonAlphanumeric = false;
-                opts.Password.RequireLowercase = false;
-                opts.Password.RequireUppercase = false;
-                opts.Password.RequireDigit = false;
-            }).AddEntityFrameworkStores<AppIdentityDbContext>();
+            services.AddIdentity<User, IdentityRole>(opts =>
+            {
 
-            services.AddMvc();
+                    opts.User.RequireUniqueEmail = true;
+                    opts.Password.RequiredLength = 6;
+                    opts.Password.RequireNonAlphanumeric = false;
+                    opts.Password.RequireLowercase = false;
+                    opts.Password.RequireUppercase = false;
+                    opts.Password.RequireDigit = false;
+                }).AddEntityFrameworkStores<AppIdentityDbContext>();
 
-            services.AddTransient<IElementViewModelRepository, ListElementViewModelRepository>();
-            services.AddTransient<ProductRepository, ProductRepository>();
+                services.AddMvc();
 
- 
-        }
+                services.AddTransient<IElementViewModelRepository, ListElementViewModelRepository>();
+                services.AddTransient<ProductRepository, ProductRepository>();
+
+
+            }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) {
-            app.UseDeveloperExceptionPage();
-            app.UseStatusCodePages();
-            app.UseStaticFiles();
-            app.UseIdentity();
-            app.UseMvc(routes => 
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Login}/{id?}"
-                )
-            );
-            /*AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
-                Configuration).Wait();*/
+                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+                app.UseStaticFiles();
+                app.UseIdentity();
+                app.UseMvc(routes =>
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Login}/{id?}"
+                    )
+                );
+                AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
+                    Configuration).Wait();
         }
     }
 }

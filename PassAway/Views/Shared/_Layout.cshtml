@@ -10,7 +10,11 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link href="~/css/HomeStyles.min.css" rel="stylesheet" />
-        @RenderSection("Styles", false)
+        <link href="~/css/LoginStyle.css" rel="stylesheet" />
+        <link href="~/css/RegisterStyle.css" rel="stylesheet" />
+        @RenderSection("RegisterStyle", false)
+        @RenderSection("LoginStyle",false)
+        @RenderSection("AdminStyles", false)
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
