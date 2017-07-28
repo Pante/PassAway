@@ -44,6 +44,9 @@ namespace PassAway {
 
 
             services.AddIdentity<User, IdentityRole>(opts => {
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 6;
