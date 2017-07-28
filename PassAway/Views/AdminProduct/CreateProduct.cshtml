@@ -1,37 +1,10 @@
 ﻿@model Product
-@{
-    ViewBag.Title = "Edit Product";
-    Layout = "_AdminLayout";
-}
-<!--<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="ProductID" />
-    <div class="form-group">
-        <div><span asp-validation-for="Name" class="text-danger"></span></div>
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-    </div>
-    <div class="form-group">
-        <div><span asp-validation-for="Stock" class="text-danger"></span></div>
-        <label asp-for="Stock"></label>
-<textarea asp-for="Stock" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-        <div><span asp-validation-for="Price" class="text-danger"></span></div>
-        <label asp-for="Price"></label>
-        <input asp-for="Price" class="form-control" />
-    </div>
-    <div class="text-center">
-        <button class="btn btn-primary" type="submit">Save</button>
-        <a asp-action="Index" class="btn btn-default">Cancel</a>
-    </div>
-</form>-->
-
 <body>
     <div>
         <ul class="b-nav">
-            <li class="b-link">Create <a href="#">Product</a></li>
+            <li class="b-link--active b-link">Create <a href="#">Product</a></li>
             <li class="b-link">View <a href="#">User</a></li>
-            <li class="b-link--active b-link">View <a href="#">Product</a></li>
+            <li class="b-link">View <a href="#">Product</a></li>
         </ul>
         <div class="b-container">
             <div class="b-menu">
@@ -40,8 +13,8 @@
                 <div class="b-bun b-bun--bottom"></div>
             </div>
         </div>
+        <div class="container" style="margin-bottom:150px;"></div>
     </div>
-    <div class="container-fluid"></div>
     <div class="container profile profile-view" id="profile">
         <div class="row">
             <div class="col-md-12 alert-col relative">
@@ -58,8 +31,8 @@
                     </div>
                     <input type="file" class="form-control" name="avatar-file">
                 </div>
-                <div class="col-md-8">
-                    <h1>Product Details</h1>
+                <div class="col-md-8" style="width:640px;">
+                    <h1>Create Product</h1>
                     <hr>
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
@@ -78,6 +51,14 @@
                     <div class="form-group">
                         <label class="control-label">Launch Date</label>
                         <input class="form-control" type="email" autocomplete="off" required="" name="email">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12" style="width:640px;">
+                            <div class="form-group">
+                                <label class="control-label">Inventory Count</label>
+                                <input class="form-control" type="password" name="password" autocomplete="off" required="">
+                            </div>
+                        </div>
                     </div>
                     <hr>
                     <div class="row">
@@ -125,3 +106,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>
 </body>
+
+}

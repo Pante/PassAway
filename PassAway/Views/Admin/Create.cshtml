@@ -1,5 +1,5 @@
 ﻿@model CreateModel
-<div class="bg-primary panel-body"><h4>Create User</h4></div>
+<!--<div class="bg-primary panel-body"><h4>Create User</h4></div>
 <div asp-validation-summary=" All" class="text-danger"></div>
 <form asp-action="Create" method="post">
     <div class="form-group">
@@ -17,4 +17,101 @@
 
     <button type="submit" class="btn btn-primary">Create</button>
     <a asp-action="Index" class="btn btn-default">Cancel</a>
-</form>
+</form>-->
+
+<body>
+    <div>
+        <ul class="b-nav">
+            <li class="b-link--active b-link" style="color:rgb(7,7,7);">Create <a href="CreateProduct.html">Product</a></li>
+            <li class="b-link" style="color:rgb(7,7,7);">View <a href="Home.html">User</a></li>
+            <li class="b-link" style="color:rgb(7,7,7);">View <a href="ViewProduct.html">Product</a></li>
+        </ul>
+        <div class="b-container">
+            <div class="b-menu">
+                <div class="b-bun b-bun--top"></div>
+                <div class="b-bun b-bun--mid"></div>
+                <div class="b-bun b-bun--bottom"></div>
+            </div>
+        </div>
+        <div class="container" style="margin-bottom:150px;"></div>
+    </div>
+    <div class="container profile profile-view" id="profile">
+        <div class="row">
+            <div class="col-md-12 alert-col relative">
+                <div class="alert alert-info absolue center" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span>Profile save with success</span>
+                </div>
+            </div>
+        </div>
+        <form>
+            <div class="row profile-row">
+                <div class="col-md-4 relative">
+                    <div class="avatar">
+                        <div class="avatar-bg center"></div>
+                    </div>
+                    <input type="file" class="form-control" name="avatar-file">
+                </div>
+                <div class="col-md-8" style="width:640px;">
+                    <h1>Create User</h1>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">FirstName</label>
+                                <input class="form-control" type="text" name="firstname">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">LastName </label>
+                                <input class="form-control" type="text" name="lastname">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email </label>
+                        <input class="form-control" type="email" autocomplete="off" required="" name="email">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Username </label>
+                                <input class="form-control" type="text" name="firstname">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Password </label>
+                                <input class="form-control" type="text" name="lastname">
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="width:140px;">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio">Male
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="width:140px;">
+                            <div class="radio" style="width:140px;">
+                                <label>
+                                    <input type="radio">Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12 content-right">
+                            <button class="btn btn-primary form-btn" type="submit">SAVE </button>
+                            <button class="btn btn-danger form-btn" type="reset">CANCEL </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>

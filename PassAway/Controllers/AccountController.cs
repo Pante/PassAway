@@ -1,32 +1,64 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PassAway.Models;
 using Microsoft.AspNetCore.Identity;
+
+using PassAway.Extensions;
+using PassAway.Models;
+
 using System;
-using System.Reflection;
-//using PassAway.Models.Identities;
+using System.Threading.Tasks;
 
-namespace PassAway.Controllers
-{
 
-    [Authorize]
-    public class AccountController : Controller
-    {
-        private UserManager<AppUser> userManager;
-        private SignInManager<AppUser> signInManager;
+namespace PassAway.Controllers {
 
-        public AccountController(UserManager<AppUser> userMgr,
-                SignInManager<AppUser> signinMgr)
-        {
-            userManager = userMgr;
-            signInManager = signinMgr;
+    public class AccountController : Controller {
+
+        private UserManager<User> users;
+        private SignInManager<User> logins;
+
+
+        public AccountController(UserManager<User> users, SignInManager<User> logins) {
+            this.users = users;
+            this.logins = logins;
         }
 
 
         [AllowAnonymous]
-        public IActionResult Login(string returnUrl)
-        {
+        public ActionResult Register() {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterModel model) {
+            if (ModelState.IsValid) {
+                var user = new User {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Country = model.Country,
+                    Address = model.Address,
+                    Gender = Genders.FromString(model.Gender),
+                    DOB = Convert.ToDateTime(model.DOB)
+                };
+
+                var result = await users.CreateAsync(user, model.Password);
+
+                if (result.Succeeded) {
+                    await logins.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+
+                } else {
+                    this.AddErrors(result);
+                }
+            }
+
+            return View(model);
+        }
+
+
+        [AllowAnonymous]
+        public IActionResult Login(string returnUrl) {
             ViewBag.returnUrl = returnUrl;
             return View();
         }
@@ -34,95 +66,34 @@ namespace PassAway.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel details,
-                string returnUrl)
-        {
-            if (ModelState.IsValid)
-            {
-                AppUser user = await userManager.FindByEmailAsync(details.Email);
-                if (user != null)
-                {
-                    await signInManager.SignOutAsync();
-                    Microsoft.AspNetCore.Identity.SignInResult result =
-                            await signInManager.PasswordSignInAsync(
-                                user, details.Password, false, false);
-                    if (result.Succeeded)
-                    {
+        public async Task<IActionResult> Login(LoginModel details, string returnUrl) {
+            if (ModelState.IsValid) {
+                var user = await users.FindByEmailAsync(details.Email);
+                if (user != null) {
+                    await logins.SignOutAsync();
+                    if (logins.PasswordSignInAsync(user, details.Password, false, false).Result.Succeeded) {
                         return Redirect(returnUrl ?? "/");
                     }
                 }
-                ModelState.AddModelError(nameof(LoginModel.Email),
-                    "Invalid user or password");
+
+                ModelState.AddModelError(nameof(LoginModel.Email), "Invalid user or password");
             }
+
             return View(details);
         }
 
-        [Authorize]
-        public async Task<IActionResult> Logout()
-        {
-            await signInManager.SignOutAsync();
+
+        public async Task<IActionResult> Logout() {
+            await logins.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 
+
         [AllowAnonymous]
-        public IActionResult AccessDenied()
-        {
+        public IActionResult AccessDenied() {
             return View();
-        }
-
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new AppUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    Country = model.Country,
-                    Address = model.Address,
-                    Gender = getGender(model.Gender),
-                    DOB = Convert.ToDateTime(model.DOB)
-                };
-                var result = await userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
-                }
-                foreach (IdentityError error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-        
-        public Models.Gender getGender(string gender)
-        {
-            Models.Gender genderEnum = Models.Gender.M;
-            if (gender == "M")
-            {
-                genderEnum = Models.Gender.M;
-            }
-            else if (gender == "F")
-            {
-                genderEnum = Models.Gender.F;
-            }
-
-            return genderEnum;
         }
 
     }
+
 }

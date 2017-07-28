@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<AppUser>
-<div class="bg-primary panel-body"><h4>User Accounts</h4></div>
+<!--<div class="bg-primary panel-body"><h4>User Accounts</h4></div>
 <div class="text-danger" asp-validation-summary="ModelOnly"></div>
 <table class="table table-condensed table-bordered">
     <tr><th>ID</th><th>Name</th><th>Email</th></tr>
@@ -9,6 +9,7 @@
     }
     else
     {
+
         foreach (AppUser user in Model)
         {
             <tr>
@@ -29,4 +30,142 @@
         }
     }
 </table>
-<a class="btn btn-primary" asp-action="Create">Create</a>
+<a class="btn btn-primary" asp-action="Create">Create</a>-->
+
+
+<body>
+    <div>
+        <ul class="b-nav">
+            <li class="b-link">Create <a href="#">Product</a></li>
+            <li class="b-link--active b-link">View <a href="#">User</a></li>
+            <li class="b-link">View <a href="#">Product</a></li>
+        </ul>
+        <div class="b-container">
+            <div class="b-menu">
+                <div class="b-bun b-bun--top"></div>
+                <div class="b-bun b-bun--mid"></div>
+                <div class="b-bun b-bun--bottom"></div>
+            </div>
+        </div>
+    </div>
+    @if (Model.Count() == 0)
+    {
+        <div class="text-center">No User Accounts</div>
+    }
+    else
+    {
+        @foreach (AppUser user in Model)
+        {
+            <div class="row clearmargin clearpadding row-image-txt">
+                <div class="col-xs-12 col-sm-6 col-md-6 clearmargin clearpadding col-sm-push-6" style="background-image:url(&quot;assets/img/office-front.jpeg&quot;);background-size:cover;height:400px;background-position:center;">
+                    <div></div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-sm-pull-6" style="padding:20px;">
+                    <h1 class="text-center">Admin Account</h1>
+                    <hr>
+                    <p class="text-justify" style="width:600px;margin-right:0px;margin-left:0px;padding-left:300px;">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel lorem a lectus finibus bibendum ut sagittis diam. Nunc egestas nulla in elit congue, id pellentesque ex semper. Aenean euismod tellus tincidunt massa eleifend, a efficitur lectus
+                        ultricies. Aliquam bibendum et leo quis consectetur. Integer consequat consequat mauris, id porttitor sem feugiat eu. Proin ac neque eu nisi viverra mattis. Curabitur molestie lectus ac sollicitudin faucibus. Duis congue ipsum eget justo
+                        egestas blandit.
+                    </p>
+                    <div style="text-align:center"></div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Transactions Register</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4>Name </h4>
+                        </div>
+                        <div class="col-md-7">
+                            <h4>Amount </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a><img class="img-circle" src="assets/img/user-photo3.jpg" width="50" height="50"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h4><a href="#">@user.UserName </a><span class="label label-success">@user.Id</span></h4>
+                                    <p class="text-muted">
+                                        @user.Email
+                                        <br>
+                                        @user.Gender
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p>
+                                <span class="h3">@user.Country </span>
+                                <br>
+                                <strong> </strong><a href="#">View Details</a>
+                            </p>
+                            <p></p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-primary" role="button" href="EditUser.html"><i class="fa fa-pencil"></i> Edit </a>
+                                <button class="btn btn-primary" type="button"> <i class="fa fa-trash-o"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav>
+                            <ul class="pagination">
+                                <li><a aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                <li class="active"><a>1</a></li>
+                                <li><a>2</a></li>
+                                <li><a>3</a></li>
+                                <li><a>4</a></li>
+                                <li><a>5</a></li>
+                                <li><a aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    <footer>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 footer-navigation">
+                <h3><a href="#">Company<span>logo </span></a></h3>
+                <p class="links"><a href="#">Home</a><strong> · </strong><a href="#">Blog</a><strong> · </strong><a href="#">Pricing</a><strong> · </strong><a href="#">About</a><strong> · </strong><a href="#">Faq</a><strong> · </strong><a href="#">Contact</a></p>
+                <p class="company-name">Company Name © 2015 </p>
+            </div>
+            <div class="col-md-4 col-sm-6 footer-contacts">
+                <div>
+                    <span class="fa fa-map-marker footer-contacts-icon"> </span>
+                    <p><span class="new-line-span">21 Revolution Street</span> Paris, France</p>
+                </div>
+                <div>
+                    <i class="fa fa-phone footer-contacts-icon"></i>
+                    <p class="footer-center-info email text-left"> +1 555 123456</p>
+                </div>
+                <div>
+                    <i class="fa fa-envelope footer-contacts-icon"></i>
+                    <p> <a href="#" target="_blank">support@company.com</a></p>
+                </div>
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="col-md-4 footer-about">
+                <h4>About the company</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                </p>
+                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-github"></i></a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>

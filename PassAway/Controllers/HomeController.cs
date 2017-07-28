@@ -29,8 +29,8 @@ namespace PassAway.Controllers
             return View();
         }
 
-        private UserManager<AppUser> userManager;
-        public HomeController(UserManager<AppUser> userMgr)
+        private UserManager<User> userManager;
+        public HomeController(UserManager<User> userMgr)
         {
             userManager = userMgr;
         }
@@ -75,7 +75,7 @@ namespace PassAway.Controllers
         {
             if (ModelState.IsValid)
             {
-                AppUser user = await CurrentUser;
+                User user = await CurrentUser;
                 user.Gender = Gender;
                 user.DOB = DOB;
                 user.Country = Country;
@@ -86,7 +86,7 @@ namespace PassAway.Controllers
             }
             return View(await CurrentUser);
         }
-        private Task<AppUser> CurrentUser =>
+        private Task<User> CurrentUser =>
         userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
 

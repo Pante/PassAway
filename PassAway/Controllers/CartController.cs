@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+
 using PassAway.Models.Shared;
 using PassAway.Models.ViewModels;
 using PassAway.Models;
-using PassAway.Utility;
+using PassAway.Extensions;
 
-namespace PassAway.Controllers { 
+using System.Linq;
+
+
+namespace PassAway.Controllers {
 
     public class CartController : Controller {
 
