@@ -9,20 +9,12 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-        <link href="~/css/HomeStyles.min.css" rel="stylesheet" />
-        <link href="~/css/LoginStyle.css" rel="stylesheet" />
-        <link href="~/css/RegisterStyle.css" rel="stylesheet" />
-        @RenderSection("RegisterStyle", false)
-        @RenderSection("LoginStyle",false)
-        @RenderSection("AdminStyles", false)
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link href="~/css/HomeStyles.min.css" rel="stylesheet" />
-        <link href="~/css/LoginStyle.css" rel="stylesheet" />
     </environment>
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
@@ -49,7 +41,7 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="container-fluid" style="margin-top:50px">
         @RenderBody()
         <hr />
         <footer>
@@ -79,6 +71,7 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
 
