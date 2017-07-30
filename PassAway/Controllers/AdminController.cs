@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PassAway.Controllers {
 
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     public class AdminController : Controller {
 
         private UserManager<User> users;
