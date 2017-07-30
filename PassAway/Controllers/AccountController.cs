@@ -2,12 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 
-using PassAway.Extensions;
 using PassAway.Models;
 
 using System;
 using System.Threading.Tasks;
-
+using System.Globalization;
 
 namespace PassAway.Controllers {
 
@@ -17,11 +16,13 @@ namespace PassAway.Controllers {
 
         private UserManager<User> users;
         private SignInManager<User> logins;
+        private IUserValidator<User> validator;
 
 
-        public AccountController(UserManager<User> users, SignInManager<User> logins) {
+        public AccountController(UserManager<User> users, SignInManager<User> logins, IUserValidator<User> validator) {
             this.users = users;
             this.logins = logins;
+            this.validator = validator;
         }
 
 
@@ -34,25 +35,25 @@ namespace PassAway.Controllers {
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model) {
-            User user = null;
-            if (ModelState.IsValid && await IsSuccessfulAsync(users.CreateAsync(user = From(model), model.Password)))  {
-                await logins.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Home");
+            if (DateTime.TryParseExact(model.DOB, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dob)) {
+                User user = new User {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Country = model.Country,
+                    Address = model.Address,
+                    Gender = Genders.FromString(model.Gender),
+                    DOB = dob
+                };
 
+                if (ModelState.IsValid && await IsSuccessfulAsync(validator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password))) {
+                    await logins.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
             } else {
-                return View(model);
+                ModelState.AddModelError("", "Invalid date, " + model.DOB);
             }
-        }
 
-        private User From(RegisterModel model) {
-            return new User {
-                UserName = model.Email,
-                Email = model.Email,
-                Country = model.Country,
-                Address = model.Address,
-                Gender = Genders.FromString(model.Gender),
-                DOB = Convert.ToDateTime(model.DOB)
-            };
+            return View(model);
         }
 
 

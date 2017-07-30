@@ -26,25 +26,50 @@
         <label asp-for="Email" for="inputEmail3" class="col-xs-2">Email</label>
         <input asp-for="Email" type="email" class="form-control col-xs-10" id="inputEmail3" placeholder="Email" required>
     </div>
+
     <div class="form-group col-xs-12">
         <label asp-for="Password" for="inputPassword3" class="col-xs-2">Password</label>
         <input asp-for="Password" type="password" class="form-control col-xs-10" id="inputPassword3" placeholder="Password" required>
     </div>
+
+    <div class="form-group col-xs-12">
+        <label asp-for="Name" for="Name" class="col-xs-2">Name</label>
+        <input asp-for="Name" type="text" class="form-control col-xs-10" id="Name" placeholder="" required>
+    </div>
+
     <div class="form-group">
         <div class="col-xs-offset-2 col-xs-10">
             <div class="radio">
                 <label>
-                    <input type="radio" name="Gender" value="Male"> Male
+                    <input asp-for="Gender" type="radio" name="Gender" value="Male"> Male
                 </label>
                 <label>
-                    <input type="radio" name="Gender" value="Female"> Female
+                    <input asp-for="Gender" type="radio" name="Gender" value="Female"> Female
                 </label>
             </div>
         </div>
     </div>
+
+    <div class="form-group col-xs-12">
+        <label asp-for="DOB" for="DOB" class="col-xs-2">DOB (DD/MM/YYYY)</label>
+        <input asp-for="DOB" type="date" class="form-control col-xs-10" id="DOB" placeholder="" required>
+    </div>
+
+    <div class="form-group col-xs-12">
+        <label asp-for="Country" for="Country" class="col-xs-2">Country</label>
+        <input asp-for="Country" type="text" class="form-control col-xs-10" id="Country" placeholder="" required>
+    </div>
+
+
+    <div class="form-group col-xs-12">
+        <label asp-for="Address" for="Address" class="col-xs-2">Address</label>
+        <input asp-for="Address" type="text" class="form-control col-xs-10" id="Address" placeholder="" required>
+    </div>
+
     <div class="form-group col-xs-12">
         <div class="col-xs-offset-2 col-xs-10">
             <button type="submit" class="btn btn-default">Register</button>
         </div>
     </div>
+
 </form>

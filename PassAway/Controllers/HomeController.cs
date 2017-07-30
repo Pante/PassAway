@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System;
 
+
 namespace PassAway.Controllers {
     public class HomeController : Controller {
 
@@ -47,8 +48,7 @@ namespace PassAway.Controllers {
         
 
         [Authorize]
-        public async Task<IActionResult> UserProps()
-        {
+        public async Task<IActionResult> UserProps() {
             return View(await CurrentUser);
         }
 
