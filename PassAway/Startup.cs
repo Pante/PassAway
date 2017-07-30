@@ -36,7 +36,7 @@ namespace PassAway {
             services.AddTransient<IUserValidator<User>, CustomUserValidator>();
             services.AddDbContext<AppIdentityDbContext>(options =>
             options.UseSqlServer(
-            Configuration["Data:SportStoreIdentity:ConnectionString"]));
+            Configuration["Data:IdentityUsers:ConnectionString"]));
             services.AddIdentity<User, IdentityRole>()
             .AddEntityFrameworkStores<AppIdentityDbContext>();
 
@@ -68,7 +68,7 @@ namespace PassAway {
                 app.UseMvc(routes =>
                     routes.MapRoute(
                         name: "default",
-                        template: "{controller=Home}/{action=Login}/{id?}"
+                        template: "{controller=Home}/{action=Index}/{id?}"
                     )
                 );
                 AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
