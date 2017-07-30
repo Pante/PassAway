@@ -10,7 +10,7 @@ namespace PassAway.Models {
 
         public static Gender FromString(string value) {
             value = value.ToLower();
-            if (value == "m") {
+            if (value == "m" || value == "male") {
                 return Gender.M;
 
             } else {

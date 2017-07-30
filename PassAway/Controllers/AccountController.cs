@@ -39,7 +39,7 @@ namespace PassAway.Controllers {
                 await logins.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
 
-            } else { 
+            } else {
                 return View(model);
             }
         }
