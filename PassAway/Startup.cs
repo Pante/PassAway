@@ -45,6 +45,10 @@ namespace PassAway {
                     opts.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<AppIdentityDbContext>();
 
+            services.AddDbContext<ApplicationContext>(options =>
+            options.UseSqlServer(
+            Configuration["Data:PassAway:ConnectionString"]));
+
             services.AddMvc();
             services.AddTransient<IElementViewModelRepository, ListElementViewModelRepository>();
             services.AddTransient<ProductRepository, ProductRepository>();
