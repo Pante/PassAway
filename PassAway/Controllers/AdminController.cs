@@ -72,26 +72,16 @@ namespace PassAway.Controllers {
 
                 IdentityResult validPass = null;
                 if (!string.IsNullOrEmpty(password)) {
-                    validPass = await passwordValidator.ValidateAsync(users,
-                    user, password);
+                    validPass = await passwordValidator.ValidateAsync(users, user, password);
+
                     if (validPass.Succeeded) {
-                        user.PasswordHash = hash.HashPassword(user,
-                        password);
+                        user.PasswordHash = hash.HashPassword(user, password);
+
                     } else {
-                        //AddErrorsFromResult(validPass);
+                        this.AddErrors(validEmail);
                     }
                 }
-                if ((validEmail.Succeeded && validPass == null)
-                || (validEmail.Succeeded
-                && password != string.Empty && validPass.Succeeded)) {
-                    IdentityResult result = await users.UpdateAsync(user);
-                    if (result.Succeeded) {
-                        return RedirectToAction("Index");
-                    } else {
-                        //AddErrorsFromResult(result);
-                    }
-                }
-                        this.AddErrors(validPass);
+
                 if ((validEmail.Succeeded && validPass == null) || (validEmail.Succeeded && password != string.Empty && validPass.Succeeded)) {
                     var result = await users.UpdateAsync(user);
                     if (result.Succeeded) {
@@ -101,6 +91,7 @@ namespace PassAway.Controllers {
                         this.AddErrors(result);
                     }
                 }
+
             } else {
                 ModelState.AddModelError("", "User Not Found");
             }
