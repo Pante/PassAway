@@ -2,12 +2,14 @@
 
 using System.Collections.Generic;
 using System.Linq;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace PassAway.Models {
 
     public class Cart {
 
+        
+        public int ID { get; set; }
         public List<CartItem> Items { get; }
 
 
@@ -46,6 +48,8 @@ namespace PassAway.Models {
 
 
         public class CartItem {
+
+            public int ID { get; set; }
 
             public Product Product { get; set; }
             public int Quantity { get; set; }
