@@ -1,21 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+
 using Newtonsoft.Json;
+
 using PassAway.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using PassAway.Models.Shared;
+
+using System;
+
 
 namespace PassAway.Models {
     public class SessionCart : Cart {
 
         public static Cart GetCart(IServiceProvider services) {
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?
-                .HttpContext.Session;
-            SessionCart cart = session?.GetJSON<SessionCart>("Cart")
-                ?? new SessionCart();
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            SessionCart cart = session?.GetJSON<SessionCart>("Cart") ?? new SessionCart();
             cart.Session = session;
             return cart;
         }

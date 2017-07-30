@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace PassAway.Models {
     public class Pagination {
@@ -14,6 +12,7 @@ namespace PassAway.Models {
         public int GetTotalPages() {
             return (int) Math.Ceiling((decimal)TotalItems / Size);
         }
+
     }
 
 }

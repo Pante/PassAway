@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 
-namespace PassAway.Models
-{
+using System;
+
+namespace PassAway.Models {
 
     public enum Gender { M, F }
 
@@ -25,8 +22,7 @@ namespace PassAway.Models
 
 
 
-    public class User : IdentityUser
-    {
+    public class User : IdentityUser {
 
         //public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser> customer)
         //{
@@ -35,6 +31,7 @@ namespace PassAway.Models
         //    // Add custom user claims here
         //    return userIdentity;
         //}
+
         public Gender Gender { get; set; }
         public DateTime DOB { get; set; }
         public string Country { get; set; }

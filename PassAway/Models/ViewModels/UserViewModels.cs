@@ -1,13 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace PassAway.Models
-{
-    public class CreateModel
-    {
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+
+namespace PassAway.Models {
+    public class CreateModel {
 
         [Required]
         public string Name { get; set; }
@@ -16,8 +14,9 @@ namespace PassAway.Models
         [Required]
         public string Password { get; set; }
     }
-    public class LoginModel
-    {
+
+
+    public class LoginModel {
         [Required]
         [UIHint("email")]
         public string Email { get; set; }
@@ -26,14 +25,15 @@ namespace PassAway.Models
         public string Password { get; set; }
     }
 
-    public class RoleEditModel
-    {
+
+    public class RoleEditModel {
         public IdentityRole Role { get; set; }
         public IEnumerable<User> Members { get; set; }
         public IEnumerable<User> NonMembers { get; set; }
     }
-    public class RoleModificationModel
-    {
+
+
+    public class RoleModificationModel {
         [Required]
         public string RoleName { get; set; }
         public string RoleId { get; set; }
@@ -41,8 +41,8 @@ namespace PassAway.Models
         public string[] IdsToDelete { get; set; }
     }
 
-    public class RegisterModel
-    {
+
+    public class RegisterModel {
         [Required]
         public string Name { get; set; }
         [Required]
@@ -63,8 +63,7 @@ namespace PassAway.Models
         public string Country { get; set; }
     }
 
-    public class ParentUsermodel
-    {
+    public class ParentUsermodel {
         public RegisterModel register { get; set; }
         public LoginModel  login { get; set; }
     }

@@ -1,52 +1,44 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using System;
 using Microsoft.AspNetCore.Identity;
+
+using Microsoft.EntityFrameworkCore;
+
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PassAway.Models
-{
+using System.Threading.Tasks;
+using System;
 
-    public class AppIdentityDbContext : IdentityDbContext<User>
-    {
 
-        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
-            : base(options) { }
+namespace PassAway.Models {
 
-        public static async Task CreateAdminAccount(IServiceProvider serviceProvider,
-            IConfiguration configuration)
-        {
+    public class AppIdentityDbContext : IdentityDbContext<User> {
 
-            UserManager<User> userManager =
-                serviceProvider.GetRequiredService<UserManager<User>>();
-            RoleManager<IdentityRole> roleManager =
-                serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options) { }
 
-            string username = configuration["Data:AdminUser:Name"];
-            string email = configuration["Data:AdminUser:Email"];
-            string password = configuration["Data:AdminUser:Password"];
-            string role = configuration["Data:AdminUser:Role"];
 
-            if (await userManager.FindByNameAsync(username) == null)
-            {
-                if (await roleManager.FindByNameAsync(role) == null)
-                {
-                    await roleManager.CreateAsync(new IdentityRole(role));
+        public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration) {
+            UserManager<User> users = serviceProvider.GetRequiredService<UserManager<User>>();
+            RoleManager<IdentityRole> roles = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            var username = configuration["Data:AdminUser:Name"];
+            var email = configuration["Data:AdminUser:Email"];
+            var password = configuration["Data:AdminUser:Password"];
+            var role = configuration["Data:AdminUser:Role"];
+
+            if (await users.FindByNameAsync(username) == null) {
+
+                if (await roles.FindByNameAsync(role) == null) {
+                    await roles.CreateAsync(new IdentityRole(role));
                 }
 
-                User user = new User
-                {
+                User user = new User {
                     UserName = username,
                     Email = email
                 };
 
-                IdentityResult result = await userManager
-                    .CreateAsync(user, password);
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, role);
+                if ((await users.CreateAsync(user, password)).Succeeded) {
+                    await users.AddToRoleAsync(user, role);
                 }
             }
         }

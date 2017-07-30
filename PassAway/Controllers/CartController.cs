@@ -6,14 +6,11 @@ using PassAway.Models;
 using PassAway.Extensions;
 
 using System.Linq;
-
+using System;
 
 namespace PassAway.Controllers {
 
     public class CartController : Controller {
-
-        private delegate void Operation(Cart cart, Product product);
-
 
         private ProductRepository repository;
 
@@ -40,11 +37,11 @@ namespace PassAway.Controllers {
         }
 
 
-        private RedirectToActionResult Handle(int id, string url, Operation operation) {
+        private RedirectToActionResult Handle(int id, string url, Action<Cart, Product> action) {
             var product = repository.Products.FirstOrDefault(p => p.ID == id);
             if (product != null) {
                 var cart = HttpContext.Session.GetJSON<Cart>("Cart") ?? new Cart();
-                operation(cart, product);
+                action(cart, product);
                 HttpContext.Session.SetJSON("Cart", cart);
             }
 

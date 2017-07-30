@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace PassAway.Controllers {
 
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
 
-    public class AccountController : Controller {
+    public class AccountController : MasterController {
 
         private UserManager<User> users;
         private SignInManager<User> logins;
@@ -34,28 +34,25 @@ namespace PassAway.Controllers {
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model) {
-            if (ModelState.IsValid) {
-                var user = new User {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    Country = model.Country,
-                    Address = model.Address,
-                    Gender = Genders.FromString(model.Gender),
-                    DOB = Convert.ToDateTime(model.DOB)
-                };
+            User user = null;
+            if (ModelState.IsValid && await IsSuccessfulAsync(users.CreateAsync(user = From(model), model.Password)))  {
+                await logins.SignInAsync(user, isPersistent: false);
+                return RedirectToAction("Index", "Home");
 
-                var result = await users.CreateAsync(user, model.Password);
-
-                if (result.Succeeded) {
-                    await logins.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
-
-                } else {
-                    this.AddErrors(result);
-                }
+            } else { 
+                return View(model);
             }
+        }
 
-            return View(model);
+        private User From(RegisterModel model) {
+            return new User {
+                UserName = model.Email,
+                Email = model.Email,
+                Country = model.Country,
+                Address = model.Address,
+                Gender = Genders.FromString(model.Gender),
+                DOB = Convert.ToDateTime(model.DOB)
+            };
         }
 
 

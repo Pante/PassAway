@@ -4,17 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 using PassAway.Extensions;
 using PassAway.Models;
-using PassAway.Models.Shared;
-
-using System.Linq;
 
 using System.Threading.Tasks;
 
 
 namespace PassAway.Controllers {
 
-    //[Authorize(Roles = "Administrator")]
-    public class AdminController : Controller {
+    [Authorize(Roles = "Administrator")]
+    public class AdminController : MasterController {
 
         private UserManager<User> users;
         private IUserValidator<User> userValidator;
@@ -47,12 +44,8 @@ namespace PassAway.Controllers {
                     Email = model.Email
                 };
 
-                var result = await users.CreateAsync(user, model.Password);
-                if (result.Succeeded) {
+                if (await IsSuccessfulAsync(users.CreateAsync(user, model.Password))) {
                     return RedirectToAction("Index");
-
-                } else {
-                    this.AddErrors(result);
                 }
             }
 
@@ -65,31 +58,16 @@ namespace PassAway.Controllers {
             var user = await users.FindByIdAsync(id);
             if (user != null) {
                 user.Email = email;
-                var validEmail = await userValidator.ValidateAsync(users, user);
-                if (!validEmail.Succeeded) {
-                    this.AddErrors(validEmail);
+
+                var emailValid = await IsSuccessfulAsync(userValidator.ValidateAsync(users, user));
+                var passwordValid = !string.IsNullOrEmpty(password) && await IsSuccessfulAsync(passwordValidator.ValidateAsync(users, user, password));
+
+                if (passwordValid) {
+                    user.PasswordHash = hash.HashPassword(user, password);
                 }
 
-                IdentityResult validPass = null;
-                if (!string.IsNullOrEmpty(password)) {
-                    validPass = await passwordValidator.ValidateAsync(users, user, password);
-
-                    if (validPass.Succeeded) {
-                        user.PasswordHash = hash.HashPassword(user, password);
-
-                    } else {
-                        this.AddErrors(validEmail);
-                    }
-                }
-
-                if ((validEmail.Succeeded && validPass == null) || (validEmail.Succeeded && password != string.Empty && validPass.Succeeded)) {
-                    var result = await users.UpdateAsync(user);
-                    if (result.Succeeded) {
-                        return RedirectToAction("Index");
-
-                    } else {
-                        this.AddErrors(result);
-                    }
+                if (emailValid && passwordValid && await IsSuccessfulAsync(users.UpdateAsync(user))) {
+                    return RedirectToAction("Index");
                 }
 
             } else {
@@ -102,21 +80,14 @@ namespace PassAway.Controllers {
 
         [HttpPost]
         public async Task<IActionResult> Delete(string id) {
-            var user = await users.FindByIdAsync(id);
-            if (user != null) {
-                var result = await users.DeleteAsync(user);
-                if (result.Succeeded) {
-                    return RedirectToAction("Index");
+            var user = await Exists(users.FindByIdAsync(id));
 
-                } else {
-                    this.AddErrors(result);
-                }
+            if (user != null && await IsSuccessfulAsync(users.DeleteAsync(user))) {
+                return RedirectToAction("Index");
 
             } else {
-                ModelState.AddModelError("", "User Not Found");
+                return View("Index", users.Users);
             }
-
-            return View("Index", users.Users);
         }
         
     }

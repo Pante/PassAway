@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using PassAway.Models.Shared;
 using PassAway.Models.ViewModels;
 using PassAway.Models;
-using Microsoft.AspNetCore.Authorization;
+
+using System.Linq;
+
 
 namespace PassAway.Controllers {
 
@@ -19,9 +17,9 @@ namespace PassAway.Controllers {
         private int size;
 
 
-        public ProductController(ProductRepository repository) {
+        public ProductController(ProductRepository repository, int size = 5) {
             this.repository = repository;
-            size = 5;
+            this.size = 5;
         }
 
 
