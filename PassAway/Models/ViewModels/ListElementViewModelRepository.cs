@@ -16,7 +16,7 @@ namespace PassAway.Models.ViewModels {
                 Account("Login", "Login", ElementViewModel.ANONYMOUS),
                 Account("Register", "Register", ElementViewModel.ANONYMOUS),
                 new FormElementViewModel {Name = "Logout", Area = "", Controller = "Account", Action = "Logout", AllowedRoles = ElementViewModel.AUTHENTICATED },
-                new ElementViewModel { Name = "Edit Users", Area = "", Controller = "Admin", Action = "Index", AllowedRoles = ElementViewModel.ADMINISTRATOR },
+                new ElementViewModel { Name = "Edit Roles", Area = "", Controller = "RoleAdmin", Action = "Index", AllowedRoles = ElementViewModel.ADMINISTRATOR },
                 new ElementViewModel { Name = "Products", Area = "", Controller = "Product", Action = "List", AllowedRoles = ElementViewModel.ALL_ROLES},
                 new ElementViewModel { Name = "Edit Products", Area = "", Controller = "AdminProduct", Action = "Product", AllowedRoles = ElementViewModel.ADMINISTRATOR}
             };
