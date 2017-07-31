@@ -11,6 +11,7 @@ using System;
 
 
 namespace PassAway.Controllers {
+
     public class HomeController : Controller {
 
         private UserManager<User> users;
@@ -18,32 +19,6 @@ namespace PassAway.Controllers {
 
         public HomeController(UserManager<User> users) {
             this.users = users;
-        }
-
-
-        public IActionResult Login() {
-            return View(GetData(nameof(Login)));
-        }
-
-
-        [Authorize(Roles = "Admins, Customers")]
-        public IActionResult OtherAction() {
-            return View("Index", GetData(nameof(OtherAction)));
-        }
-
-
-        private Dictionary<string, object> GetData(string action) {
-            return new Dictionary<string, object> {
-                ["Action"] = action,
-                ["User"] = HttpContext.User.Identity.Name,
-                ["Authenticated"] = HttpContext.User.Identity.IsAuthenticated,
-                ["Auth Type"] = HttpContext.User.Identity.AuthenticationType,
-                ["In Users Role"] = HttpContext.User.IsInRole("Users"),
-                ["Gender"] = CurrentUser.Result.Gender,
-                ["DOB"] = CurrentUser.Result.DOB,
-                ["Country"] = CurrentUser.Result.Country,
-                ["Address"] = CurrentUser.Result.Address
-            };
         }
         
 

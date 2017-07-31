@@ -13,15 +13,26 @@ namespace PassAway.Models.ViewModels {
                 Home("Home", "Index"),
                 Home("About", "About"),
                 Home("Contact", "Contact"),
-                Home("Login", "Login"),
-                new ElementViewModel { Name = "Register", Area = "", Controller = "Account", Action = "Register", AllowedRoles = ElementViewModel.ANONYMOUS },
+                Account("Login", "Login", ElementViewModel.ANONYMOUS),
+                Account("Register", "Register", ElementViewModel.ANONYMOUS),
+                Account("Logout", "Logout", ElementViewModel.AUTHENTICATED),
                 new ElementViewModel { Name = "Edit Users", Area = "", Controller = "Admin", Action = "Index", AllowedRoles = ElementViewModel.ADMINISTRATOR },
                 new ElementViewModel { Name = "Products", Area = "", Controller = "Product", Action = "List", AllowedRoles = ElementViewModel.ALL_ROLES},
                 new ElementViewModel { Name = "Edit Products", Area = "", Controller = "AdminProduct", Action = "Product", AllowedRoles = ElementViewModel.ADMINISTRATOR}
             };
         }
 
-        
+
+        private ElementViewModel Account(string name, string action, List<string> roles) {
+            return new ElementViewModel() {
+                Name = name,
+                Area = "",
+                Controller = "Account",
+                Action = action,
+                AllowedRoles = roles
+            };
+        }
+
         private ElementViewModel Home(string name, string action) {
             return new ElementViewModel() {
                 Name = name,
