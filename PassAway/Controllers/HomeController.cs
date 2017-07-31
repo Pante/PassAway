@@ -12,6 +12,7 @@ using System;
 
 namespace PassAway.Controllers {
 
+    [AllowAnonymous]
     public class HomeController : Controller {
 
         private UserManager<User> users;

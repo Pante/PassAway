@@ -15,7 +15,7 @@ namespace PassAway.Models.ViewModels {
                 Home("Contact", "Contact"),
                 Account("Login", "Login", ElementViewModel.ANONYMOUS),
                 Account("Register", "Register", ElementViewModel.ANONYMOUS),
-                Account("Logout", "Logout", ElementViewModel.AUTHENTICATED),
+                new FormElementViewModel {Name = "Logout", Area = "", Controller = "Account", Action = "Logout", AllowedRoles = ElementViewModel.AUTHENTICATED },
                 new ElementViewModel { Name = "Edit Users", Area = "", Controller = "Admin", Action = "Index", AllowedRoles = ElementViewModel.ADMINISTRATOR },
                 new ElementViewModel { Name = "Products", Area = "", Controller = "Product", Action = "List", AllowedRoles = ElementViewModel.ALL_ROLES},
                 new ElementViewModel { Name = "Edit Products", Area = "", Controller = "AdminProduct", Action = "Product", AllowedRoles = ElementViewModel.ADMINISTRATOR}
@@ -47,4 +47,10 @@ namespace PassAway.Models.ViewModels {
         public IEnumerable<ElementViewModel> Elements => elements;
 
     }
+
+
+    public class FormElementViewModel : ElementViewModel {
+
+    }
+
 }

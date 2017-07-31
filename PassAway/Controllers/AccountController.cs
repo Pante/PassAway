@@ -87,10 +87,15 @@ namespace PassAway.Controllers {
             return View(details);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Customers, Admins")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout(string url = "/") {
+            Debug.WriteLine("HALP");
 
-        public async Task<IActionResult> Logout() {
             await logins.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+
+            return Redirect(url);
         }
 
 
