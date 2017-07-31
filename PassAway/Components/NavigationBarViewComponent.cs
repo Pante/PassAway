@@ -36,7 +36,6 @@ namespace PassAway.Components {
 
             return View(repository.Elements.Where(element => element.AllowedRoles.Any(role => roles.Contains(role))));
         }
-
     }
 
 }
