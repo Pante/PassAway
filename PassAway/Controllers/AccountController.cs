@@ -47,11 +47,6 @@ namespace PassAway.Controllers {
                     Gender = Genders.FromString(model.Gender),
                     DOB = dob
                 };
-                var rator = roles.Roles.GetEnumerator();
-                while (rator.MoveNext()) {
-                    var current = rator.Current;
-                    Debug.WriteLine("EGBWEGWVEGIWYVEGIYWVEGI" + current.Id  + " HEY THERE " + current.Name);
-                }
 
                 if (ModelState.IsValid && await IsSuccessfulAsync(validator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password)) && await IsSuccessfulAsync(users.AddToRoleAsync(user, "Customers"))) {
                     Debug.WriteLine(user.Roles.Count);
