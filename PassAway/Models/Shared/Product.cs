@@ -9,7 +9,7 @@ namespace PassAway.Models.Shared {
 
         [Required(ErrorMessage = "Please enter a product name")]
         public string Name { get; set; }
-        public string Description { get; set; }
+        //public string Description { get; set; }
         public string URL { get; set; }
 
         public DateTime Launched { get; set; }

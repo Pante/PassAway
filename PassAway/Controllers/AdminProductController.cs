@@ -8,7 +8,7 @@ using PassAway.Models.Shared;
 
 namespace PassAway.Controllers {
 
-    [Authorize(Roles = "Admins")]
+    //[Authorize(Roles = "Admins")]
     public class AdminProductController : Controller {
 
         private ProductRepository repository;
@@ -40,6 +40,7 @@ namespace PassAway.Controllers {
                 return View(product);
             }
         }
+        
 
     }
 }
