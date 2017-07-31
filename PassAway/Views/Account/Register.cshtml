@@ -32,15 +32,15 @@
         <label asp-for="DOB" for="DOB" name="dateofbirth" class="col-xs-2">DOB (DD/MM/YYYY)</label>
         <input asp-for="DOB" type="date" class="form-control col-xs-10" id="DOB" placeholder="" required>
         <script type="text/javascript">
-        $(function() {
-        $('input[name="birthdate"]').daterangepicker({
-        singleDatePicker: true,
-        showDropdowns: true
-        },
-        $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('MM/DD/YYYY'));
-        });
-        });
+            $(function () {
+                $('input[name="birthdate"]').daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true
+                },
+                    $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
+                        $(this).val(picker.startDate.format('MM/DD/YYYY'));
+                    });
+            });
         </script>
     </div>
 
