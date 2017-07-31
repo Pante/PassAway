@@ -26,7 +26,7 @@ namespace PassAway.Controllers {
         }
 
 
-        [Authorize(Roles = "Administrator, Customer")]
+        [Authorize(Roles = "Admins, Customers")]
         public IActionResult OtherAction() {
             return View("Index", GetData(nameof(OtherAction)));
         }

@@ -22,7 +22,7 @@ namespace PassAway.Models.ViewModels {
         }
 
         
-        protected ElementViewModel Home(string name, string action) {
+        private ElementViewModel Home(string name, string action) {
             return new ElementViewModel() {
                 Name = name,
                 Area = "",

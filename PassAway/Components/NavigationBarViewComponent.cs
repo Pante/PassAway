@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 using PassAway.Models;
 using PassAway.Models.ViewModels;
-
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 
 
@@ -30,6 +31,7 @@ namespace PassAway.Components {
 
         public IViewComponentResult Invoke() {
             var user = users.GetUserAsync(HttpContext.User).Result;
+            user.Roles
             var roles = user != null ? user.Roles.Select(role => role.RoleId).ToList() : NONE;
 
             return View(repository.Elements.Where(element => roles.Any(role => element.AllowedRoles.Contains(role))));

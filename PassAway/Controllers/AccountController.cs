@@ -7,20 +7,23 @@ using PassAway.Models;
 using System;
 using System.Threading.Tasks;
 using System.Globalization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace PassAway.Controllers {
 
-    [Authorize(Roles = "Administrator")]
-
+    [Authorize(Roles = "Admins")]
     public class AccountController : MasterController {
 
         private UserManager<User> users;
+        private RoleManager<IdentityRole> roles;
         private SignInManager<User> logins;
         private IUserValidator<User> validator;
 
 
-        public AccountController(UserManager<User> users, SignInManager<User> logins, IUserValidator<User> validator) {
+        public AccountController(UserManager<User> users,  RoleManager<IdentityRole> roles, SignInManager<User> logins, IUserValidator<User> validator) {
             this.users = users;
+            this.roles = roles;
             this.logins = logins;
             this.validator = validator;
         }
@@ -44,8 +47,18 @@ namespace PassAway.Controllers {
                     Gender = Genders.FromString(model.Gender),
                     DOB = dob
                 };
+                var rator = roles.Roles.GetEnumerator();
+                while (rator.MoveNext()) {
+                    var current = rator.Current;
+                    Debug.WriteLine("EGBWEGWVEGIWYVEGIYWVEGI" + current.Id  + " HEY THERE " + current.Name);
+                }
 
-                if (ModelState.IsValid && await IsSuccessfulAsync(validator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password))) {
+                if (ModelState.IsValid && await IsSuccessfulAsync(validator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password)) && await IsSuccessfulAsync(users.AddToRoleAsync(user, "Customers"))) {
+                    Debug.WriteLine(user.Roles.Count);
+                    foreach (var a in user.Roles) {
+                        Debug.WriteLine(a.RoleId);
+                    }
+
                     await logins.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

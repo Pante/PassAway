@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PassAway.Controllers {
 
-    [Authorize(Roles = "Adminstrator")]
+    [Authorize(Roles = "Admins")]
     public class RoleAdminController : MasterController {
 
         private RoleManager<IdentityRole> roles;

@@ -4,9 +4,9 @@
 namespace PassAway.Models.ViewModels {
     public class ElementViewModel {
 
-        public static List<string> ALL_ROLES = new List<string> { "", "Administrator", "Customer" };
-        public static List<string> AUTHENTICATED = new List<string> { "Administrator", "Customer" };
-        public static List<string> ADMINISTRATOR = new List<string> { "Administrator" };
+        public static List<string> ALL_ROLES = new List<string> { "", "Admins", "Customers" };
+        public static List<string> AUTHENTICATED = new List<string> { "Admins", "Customers" };
+        public static List<string> ADMINISTRATOR = new List<string> { "Admins" };
 
 
         public string Name { get; set; }
