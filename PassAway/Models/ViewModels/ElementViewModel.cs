@@ -7,6 +7,7 @@ namespace PassAway.Models.ViewModels {
         public static List<string> ALL_ROLES = new List<string> { "", "Admins", "Customers" };
         public static List<string> AUTHENTICATED = new List<string> { "Admins", "Customers" };
         public static List<string> ADMINISTRATOR = new List<string> { "Admins" };
+        public static List<string> ANONYMOUS = new List<string> { "" };
 
 
         public string Name { get; set; }

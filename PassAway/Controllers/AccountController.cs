@@ -38,7 +38,7 @@ namespace PassAway.Controllers {
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model) {
-            if (DateTime.TryParseExact(model.DOB, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dob)) {
+            if (DateTime.TryParseExact(model.DOB, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dob) && model.Gender != null) {
                 User user = new User {
                     UserName = model.Email,
                     Email = model.Email,
@@ -49,10 +49,7 @@ namespace PassAway.Controllers {
                 };
 
                 if (ModelState.IsValid && await IsSuccessfulAsync(validator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password)) && await IsSuccessfulAsync(users.AddToRoleAsync(user, "Customers"))) {
-                    Debug.WriteLine(user.Roles.Count);
-                    foreach (var a in user.Roles) {
-                        Debug.WriteLine(a.RoleId);
-                    }
+                    var iterator = roles.Roles.GetEnumerator();
 
                     await logins.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");

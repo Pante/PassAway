@@ -1,23 +1,4 @@
 @model Product
-@*<div class="well">
-    <h3>
-        <strong>@Model.Name</strong>
-        <span class="pull-right label label-primary">
-            @Model.Price.ToString("c")
-        </span>
-    </h3>
-    <form id="@Model.ID" asp-action="Add" asp-controller="Cart" method="post">
-        <input type="hidden" asp-for="ID" />
-        <input type="hidden" name="URL"
-               value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-        <span class="lead">
-            @Model.Description
-            <button type="submit" class="btn btn-success btn-sm pull-right">
-                Add To Cart
-            </button>
-        </span>
-    </form>
-</div>*@
 
 <div class="row clearmargin clearpadding row-image-txt">
     <div class="col-xs-12 col-sm-6 col-md-6 clearmargin clearpadding col-sm-push-6" style="background-image:url(&quot;assets/img/office-front.jpeg&quot;);background-size:cover;height:400px;background-position:center;">

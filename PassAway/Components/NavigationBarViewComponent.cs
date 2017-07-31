@@ -22,30 +22,19 @@ namespace PassAway.Components {
 
         private IElementViewModelRepository repository;
         private UserManager<User> users;
-        private RoleManager<IdentityRole> roles;
 
 
-        public NavigationBarViewComponent(IElementViewModelRepository repository, UserManager<User> users, RoleManager<IdentityRole> roles) {
+        public NavigationBarViewComponent(IElementViewModelRepository repository, UserManager<User> users) {
             this.repository = repository;
             this.users = users;
-            this.roles = roles;
         }
 
 
         public IViewComponentResult Invoke() {
             var user = users.GetUserAsync(HttpContext.User).Result;
-            var names = GetRoleNames(user);
+            var roles = user != null ? users.GetRolesAsync(user).Result : NONE;
 
-            return View(repository.Elements.Where(element => element.AllowedRoles.Any(role => names.Contains(role));
-        }
-
-        private List<string> GetRoleNames(User user) {
-            if (user != null) {
-                return user.Roles.Select(role => roles.FindByIdAsync(role.RoleId).Result.Name).ToList();
-
-            } else {
-                return NONE;
-            }
+            return View(repository.Elements.Where(element => element.AllowedRoles.Any(role => roles.Contains(role))));
         }
 
     }
