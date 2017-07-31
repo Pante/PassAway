@@ -36,7 +36,7 @@ namespace PassAway.Components {
             var user = users.GetUserAsync(HttpContext.User).Result;
             var names = GetRoleNames(user);
 
-            return View(repository.Elements.Where(element => element.AllowedRoles.Any(role => names.Contains(role));
+            return View(repository.Elements.Where(element => element.AllowedRoles.Any(role => names.Contains(role))));
         }
 
         private List<string> GetRoleNames(User user) {
