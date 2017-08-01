@@ -20,6 +20,7 @@
                             <form asp-controller="@item.Controller" asp-action="@item.Action" method="post" class="nav navbar-right">
                                 <input type="submit" value="@item.Name" />
                             </form>
+
                         } else {
                             <a asp-area="@item.Area" asp-controller="@item.Controller" asp-action="@item.Action">@item.Name</a>
                         }
@@ -29,3 +30,4 @@
         </div>
     </div>
 </nav>
+
