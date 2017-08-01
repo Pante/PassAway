@@ -50,7 +50,7 @@ namespace PassAway {
             Configuration["Data:PassAway:ConnectionString"]));
 
             services.AddMvc();
-            services.AddTransient<IElementViewModelRepository, ListElementViewModelRepository>();
+            services.AddTransient<ElementViewModelRepository, ElementViewModelRepository>();
             services.AddTransient<ProductRepository, ProductRepository>();
         }
 

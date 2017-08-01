@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+
 namespace PassAway.Infrastructure {
 
     public class CustomPasswordValidator : PasswordValidator<User> {

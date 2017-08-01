@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 using PassAway.Models;
 
 using System;
 using System.Threading.Tasks;
 using System.Globalization;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 using System.Diagnostics;
+
 
 namespace PassAway.Controllers {
 
@@ -21,7 +23,7 @@ namespace PassAway.Controllers {
         private IUserValidator<User> validator;
 
 
-        public AccountController(UserManager<User> users,  RoleManager<IdentityRole> roles, SignInManager<User> logins, IUserValidator<User> validator) {
+        public AccountController(UserManager<User> users, RoleManager<IdentityRole> roles, SignInManager<User> logins, IUserValidator<User> validator) {
             this.users = users;
             this.roles = roles;
             this.logins = logins;
@@ -38,8 +40,35 @@ namespace PassAway.Controllers {
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model) {
-            if (DateTime.TryParseExact(model.DOB, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dob) && model.Gender != null) {
-                User user = new User {
+            var user = validate(model);
+            if (user != null && ModelState.IsValid && await IsSuccessfulAsync(validator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password)) && await IsSuccessfulAsync(users.AddToRoleAsync(user, "Customers"))) {
+                await logins.SignInAsync(user, isPersistent: false);
+                return RedirectToAction("Index", "Home");
+
+            } else {
+                return View(model);
+            }
+            
+        }
+
+        private User validate(RegisterModel model) {
+            bool dateValid = DateTime.TryParseExact(model.DOB, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dob);
+            if (!dateValid) {
+                ModelState.AddModelError("", "Invalid date: " + model.DOB);
+            }
+
+            bool genderValid = model.Gender != null;
+            if (!genderValid) {
+                ModelState.AddModelError("", "Gender cannot be left blank");
+            }
+
+            bool passwordMatch = model.Password == model.ConfirmedPassword;
+            if (!passwordMatch) {
+                ModelState.AddModelError("", "Passwords do not match");
+            }
+
+            if (dateValid && genderValid && passwordMatch) {
+                return new User {
                     UserName = model.Email,
                     Email = model.Email,
                     Country = model.Country,
@@ -48,17 +77,9 @@ namespace PassAway.Controllers {
                     DOB = dob
                 };
 
-                if (ModelState.IsValid && await IsSuccessfulAsync(validator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password)) && await IsSuccessfulAsync(users.AddToRoleAsync(user, "Customers"))) {
-                    var iterator = roles.Roles.GetEnumerator();
-
-                    await logins.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
-                }
             } else {
-                ModelState.AddModelError("", "Invalid date, " + model.DOB);
+                return null;
             }
-
-            return View(model);
         }
 
 
@@ -90,18 +111,10 @@ namespace PassAway.Controllers {
         [HttpPost]
         [Authorize(Roles = "Customers, Admins")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout(string url = "/") {
-            Debug.WriteLine("HALP");
-
+        public async Task<IActionResult> Logout() {
             await logins.SignOutAsync();
 
-            return Redirect(url);
-        }
-
-
-        [AllowAnonymous]
-        public IActionResult AccessDenied() {
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
     }

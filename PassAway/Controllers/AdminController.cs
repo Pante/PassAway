@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-using PassAway.Extensions;
 using PassAway.Models;
 
 using System.Threading.Tasks;

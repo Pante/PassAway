@@ -17,13 +17,10 @@
                 @foreach (var item in Model) {
                     <li>
                         @if (item is FormElementViewModel) {
-                            @*<form asp-controller="@item.Controller" asp-action="@item.Action" method="post" class="nav navbar-right">
+                            <form asp-controller="@item.Controller" asp-action="@item.Action" method="post" class="nav navbar-right">
                                 <input type="submit" value="@item.Name" />
-                            </form>*@
-                            <a asp-area="@item.Area" asp-controller="@item.Controller" asp-action="@item.Action">@item.Name</a>
-                        }
-                        else
-                        {
+                            </form>
+                        } else {
                             <a asp-area="@item.Area" asp-controller="@item.Controller" asp-action="@item.Action">@item.Name</a>
                         }
                     </li>
@@ -31,10 +28,4 @@
             </ul>
         </div>
     </div>
-</nav>
-
-<nav class="">
-    <ul class=" ">
-        
-    </ul>
 </nav>
