@@ -1,4 +1,4 @@
-﻿@model ProductsViewModel
+﻿@*@model ProductsViewModel
 
 @foreach (var p in Model.Products)
 {
@@ -6,4 +6,13 @@
         <h3>@p.Name</h3>
         <h4>@p.Price.ToString("c")</h4>
     </div>
+}*@
+@model ProductsViewModel
+@foreach (var p in Model.Products)
+{
+    <div>
+        <h3>@p.Name</h3>
+        <h4>@p.Price.ToString("c")</h4>
+    </div>
 }
+<div page-model="@Model.Pagination" page-action="List"></div>
