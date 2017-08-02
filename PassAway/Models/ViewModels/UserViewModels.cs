@@ -26,6 +26,39 @@ namespace PassAway.Models {
     }
 
 
+    public class EditProfileModel {
+
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public string Gender { get; set; }
+
+        [Required]
+        public string DOB { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
+        [Required]
+        public string Country { get; set; }
+
+    }
+
+    public class EditLoginModel {
+
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string NewPasword { get; set; }
+        [Required]
+        public string NewPasswordConfirmed { get; set; }
+        [Required]
+        public string Password { get; set; }
+        [Required]
+        public string ConfirmedPassword { get; set; }
+    }
+
+
     public class RoleEditModel {
         public IdentityRole Role { get; set; }
         public IEnumerable<User> Members { get; set; }

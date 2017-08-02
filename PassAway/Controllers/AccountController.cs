@@ -9,8 +9,6 @@ using System;
 using System.Threading.Tasks;
 using System.Globalization;
 
-using System.Diagnostics;
-
 
 namespace PassAway.Controllers {
 
@@ -40,7 +38,7 @@ namespace PassAway.Controllers {
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model) {
-            var user = validate(model);
+            var user = Validate(model);
             if (user != null && ModelState.IsValid && await IsSuccessfulAsync(validator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password)) && await IsSuccessfulAsync(users.AddToRoleAsync(user, "Customers"))) {
                 await logins.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
@@ -51,7 +49,7 @@ namespace PassAway.Controllers {
             
         }
 
-        private User validate(RegisterModel model) {
+        private User Validate(RegisterModel model) {
             bool dateValid = DateTime.TryParseExact(model.DOB, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dob);
             if (!dateValid) {
                 ModelState.AddModelError("", "Invalid date: " + model.DOB);
