@@ -46,8 +46,8 @@ namespace PassAway {
             }).AddEntityFrameworkStores<AppIdentityDbContext>();
 
             services.AddDbContext<ApplicationContext>(options =>
-            options.UseSqlServer(
-            Configuration["Data:PassAway:ConnectionString"]));
+                options.UseSqlServer(Configuration["Data:PassAway:ConnectionString"])
+            );
 
             services.AddMvc();
             services.AddTransient<ElementViewModelRepository, ElementViewModelRepository>();

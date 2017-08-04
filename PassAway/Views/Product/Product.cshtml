@@ -1,5 +1,5 @@
-﻿@using PassAway.Models
-@model ProductsViewModel
+﻿@model ProductsViewModel
+
 @{
     ViewBag.Title = "All Products";
     Layout = "_Layout";
@@ -19,8 +19,7 @@
             </div>
         </div>
     </div>
-    @foreach (var item in Model.Products)
-    {
+    @foreach (var item in Model.Products) {
         <div class="container" style="margin-bottom:150px;"></div>
             <div class="row product-list">
                 <div class="col-md-4 col-sm-6 product-item">

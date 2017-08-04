@@ -24,25 +24,29 @@ namespace PassAway.Controllers {
 
         public async Task<IActionResult> Index() {
             var user = await users.GetUserAsync(HttpContext.User);
-            return View(new EditProfileModel {
-                Name = user.UserName,
-                Gender = user.Gender.ToString(),
-                DOB = user.DOB.ToString("dd/MM/yyyy"),
-                Address = user.Address,
-                Country = user.Country
-            });
+            return View(
+                //register model here
+            );
         }
 
-        
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProfileAsync(EditProfileModel model) {
+        public IActionResult Authenticate() {
+            // return view to password page
             return null;
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditLoginAsync(EditLoginModel model) {
+        public async Task<IActionResult> AuthenticateAsync(LoginModel model) {
+            return null;
+        }
+
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(RegisterModel model) {
+            //validate data etc
+            //store it
             return null;
         }
 
