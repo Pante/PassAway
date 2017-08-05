@@ -12,7 +12,6 @@ using System.Globalization;
 
 namespace PassAway.Controllers {
 
-    [Authorize(Roles = "Admins")]
     public class AccountController : MasterController {
 
         private UserManager<User> users;
