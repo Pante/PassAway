@@ -24,6 +24,7 @@ namespace PassAway.Controllers {
 
 
         public ViewResult List(int page = 1) {
+            Debug.WriteLine("COUNT: " + repository.Products.Count());
             return View(
                 new ProductsViewModel() {
                     Products = repository.Products.OrderBy(product => product.ID).Skip((page - 1) * size).Take(size),

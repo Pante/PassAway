@@ -13,7 +13,7 @@ namespace PassAway.Models.ViewModels {
         public ElementViewModelRepository() {
             elements = new List<ElementViewModel>() {
                 Home("Home", "Index"),
-                new ElementViewModel { Name = "Profile", Area = "", Controller = "Profile", Action = "Index", AllowedRoles = AUTHENTICATED},
+                Account("Profile", "Validate", AUTHENTICATED),
                 Home("About", "About"),
                 Home("Contact", "Contact"),
                 Account("Login", "Login", ANONYMOUS),

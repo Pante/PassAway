@@ -8,7 +8,7 @@ using PassAway.Models;
 using System;
 using System.Threading.Tasks;
 using System.Globalization;
-
+using System.Diagnostics;
 
 namespace PassAway.Controllers {
 
@@ -17,14 +17,18 @@ namespace PassAway.Controllers {
         private UserManager<User> users;
         private RoleManager<IdentityRole> roles;
         private SignInManager<User> logins;
-        private IUserValidator<User> validator;
+        private IUserValidator<User> userValidator;
+        private IPasswordValidator<User> passwordValidator;
+        private IPasswordHasher<User> hash;
 
 
-        public AccountController(UserManager<User> users, RoleManager<IdentityRole> roles, SignInManager<User> logins, IUserValidator<User> validator) {
+        public AccountController(UserManager<User> users, RoleManager<IdentityRole> roles, SignInManager<User> logins, IUserValidator<User> userValidator, IPasswordValidator<User> passwordValidator, IPasswordHasher<User> hash) {
             this.users = users;
             this.roles = roles;
             this.logins = logins;
-            this.validator = validator;
+            this.userValidator = userValidator;
+            this.passwordValidator = passwordValidator;
+            this.hash = hash;
         }
 
 
@@ -38,7 +42,7 @@ namespace PassAway.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model) {
             var user = Validate(model);
-            if (user != null && ModelState.IsValid && await IsSuccessfulAsync(validator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password)) && await IsSuccessfulAsync(users.AddToRoleAsync(user, "Customers"))) {
+            if (user != null && ModelState.IsValid && await IsSuccessfulAsync(userValidator.ValidateAsync(users, user)) && await IsSuccessfulAsync(users.CreateAsync(user, model.Password)) && await IsSuccessfulAsync(users.AddToRoleAsync(user, "Customers"))) {
                 await logins.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
 
@@ -103,6 +107,115 @@ namespace PassAway.Controllers {
 
             return View(details);
         }
+
+
+        [Authorize(Roles = "Customers, Admins")]
+        public IActionResult Validate() {
+            return View(new PasswordModel());
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Customers, Admins")]
+        public async Task<IActionResult> Validate(PasswordModel model) {
+            if (ModelState.IsValid) {
+                var user = await users.GetUserAsync(HttpContext.User);
+
+                if (user != null && model.Password != null & hash.VerifyHashedPassword(user, user.PasswordHash, model.Password) == PasswordVerificationResult.Success) {
+                    return RedirectToAction("Profile");
+
+                } else {
+                    ModelState.AddModelError(nameof(PasswordModel), "Invalid password");
+                }
+            }
+
+            return View();
+        }
+
+
+        [Authorize(Roles = "Customers, Admins")]
+        public async Task<IActionResult> Profile() {
+            var user = await users.GetUserAsync(HttpContext.User);
+            if (user != null) {
+                return View(new RegisterModel {
+                    Name = user.UserName,
+                    Email = user.Email,
+                    Gender = user.Gender.ToString(),
+                    DOB = user.DOB.ToString(),
+                    Address = user.Address,
+                    Country = user.Country
+                });
+
+            } else {
+                return RedirectToAction("Login");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customers, Admins")]
+        public async Task<IActionResult> EditProfile(RegisterModel model) {
+            var user = await users.GetUserAsync(HttpContext.User);
+            var updated = Validate(model);
+
+            if (updated != null) {
+                user.UserName = updated.UserName;
+                user.Gender = updated.Gender;
+                user.Country = updated.Country;
+                user.Address = updated.Address;
+
+                await users.UpdateAsync(user);
+                return RedirectToAction("Home", "Index");
+
+            } else {
+                return RedirectToAction("Profile");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customers, Admins")]
+        public async Task<IActionResult> EditEmail(RegisterModel model) {
+            var user = await users.GetUserAsync(HttpContext.User);
+
+            if (model.Email != null) {
+                user.Email = model.Email;
+
+                await users.UpdateAsync(user);
+                return RedirectToAction("Home", "Index");
+
+            } else {
+                return RedirectToAction("Profile");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customers, Admins")]
+        public async Task<IActionResult> EditPassword(RegisterModel model) {
+            var user = await users.GetUserAsync(HttpContext.User);
+   
+            if (user != null && model.Password != null && model.Password == model.ConfirmedPassword && await IsSuccessfulAsync(passwordValidator.ValidateAsync(users, user, model.Password))) {
+                user.PasswordHash = hash.HashPassword(user, model.Password);
+
+                var result = await users.UpdateAsync(user);
+                if (result.Succeeded) {
+                    Debug.WriteLine("Ops");
+                } else {
+                    Debug.WriteLine("OKkkkk");
+                }
+
+                return RedirectToAction("Home", "Index");
+
+            } else {
+                foreach (var state in ModelState.Values) {
+                    foreach(var error in state.Errors) {
+                        Debug.WriteLine("Error: " + error.ErrorMessage);
+                    }
+                }
+                return RedirectToAction("Profile");
+            }
+        }
+
 
         [HttpPost]
         [Authorize(Roles = "Customers, Admins")]

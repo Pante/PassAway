@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 namespace PassAway.Models {
+
     public class CreateModel {
 
         [Required]
@@ -59,6 +60,13 @@ namespace PassAway.Models {
     }
 
 
+    public class PasswordModel {
+
+        public string Password { get; set; }
+
+    }
+
+
     public class RoleEditModel {
         public IdentityRole Role { get; set; }
         public IEnumerable<User> Members { get; set; }
@@ -76,28 +84,22 @@ namespace PassAway.Models {
 
 
     public class RegisterModel {
-        [Required]
+     
         public string Name { get; set; }
-        [Required]
         public string Email { get; set; }
-        [Required]
         public string Password { get; set; }
-        [Required]
         public string ConfirmedPassword { get; set; }
 
 
-        [Required]
         public string Gender { get; set; }
         
-        [Required]
         public string DOB { get; set; }
-        
-        [Required]
-        public string Address { get; set; }
 
-        [Required]
+        public string Address { get; set; }
         public string Country { get; set; }
+
     }
+
 
     public class ParentUsermodel {
         public RegisterModel register { get; set; }
