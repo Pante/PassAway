@@ -14,18 +14,23 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                @foreach (var item in Model) {
-                    <li>
-                        @if (item is FormElementViewModel) {
-                            <form asp-controller="@item.Controller" asp-action="@item.Action" method="post" class="nav navbar-right">
-                                <input type="submit" value="@item.Name" />
+            @foreach (var item in Model)
+            {
+                <li>
+                    @if (item is FormElementViewModel)
+                    {
+                        <a>
+                            <form asp-controller="@item.Controller" asp-action="@item.Action" method="post">
+                                <input type="submit" value="@item.Name" style="border:hidden; background-color:hsl(0, 0%, 13%)"/>
                             </form>
-
-                        } else {
-                            <a asp-area="@item.Area" asp-controller="@item.Controller" asp-action="@item.Action">@item.Name</a>
-                        }
-                    </li>
-                }
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="@item.Area" asp-controller="@item.Controller" asp-action="@item.Action">@item.Name</a>
+                    }
+                </li>
+            }
             </ul>
         </div>
     </div>

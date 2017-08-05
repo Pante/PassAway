@@ -44,8 +44,7 @@ namespace PassAway.Controllers {
 
             } else {
                 return View(model);
-            }
-            
+            }      
         }
 
         private User Validate(RegisterModel model) {
