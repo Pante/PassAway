@@ -164,7 +164,7 @@ namespace PassAway.Controllers {
                 user.Address = updated.Address;
 
                 await users.UpdateAsync(user);
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
 
             } else {
                 return RedirectToAction("Profile");
@@ -181,7 +181,7 @@ namespace PassAway.Controllers {
                 user.Email = model.Email;
 
                 await users.UpdateAsync(user);
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
 
             } else {
                 return RedirectToAction("Profile");
@@ -204,7 +204,7 @@ namespace PassAway.Controllers {
                     Debug.WriteLine("OKkkkk");
                 }
 
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Index", "Home");
 
             } else {
                 foreach (var state in ModelState.Values) {

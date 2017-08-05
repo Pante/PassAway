@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Email:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" value="@Model.Email">
+                        <input asp-for="Email" class="form-control" type="text" value="@Model.Email">
                     </div>
                 </div>
 
@@ -90,13 +90,13 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label">New password:</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="password" value="">
+                        <input asp-for="Password" class="form-control" type="password" value="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Confirm new password:</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="password" value="">
+                        <input asp-for="ConfirmedPassword" class="form-control" type="password" value="">
                     </div>
                 </div>
 
