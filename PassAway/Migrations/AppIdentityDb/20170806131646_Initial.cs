@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace PassAway.Migrations
+namespace PassAway.Migrations.AppIdentityDb
 {
     public partial class Initial : Migration
     {

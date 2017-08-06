@@ -174,23 +174,6 @@ namespace PassAway.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customers, Admins")]
-        public async Task<IActionResult> EditEmail(RegisterModel model) {
-            var user = await users.GetUserAsync(HttpContext.User);
-
-            if (model.Email != null) {
-                user.Email = model.Email;
-
-                await users.UpdateAsync(user);
-                return RedirectToAction("Index", "Home");
-
-            } else {
-                return RedirectToAction("Profile");
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customers, Admins")]
         public async Task<IActionResult> EditPassword(RegisterModel model) {
             var user = await users.GetUserAsync(HttpContext.User);
    

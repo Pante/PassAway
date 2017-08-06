@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace PassAway.Migrations.Application
+namespace PassAway.Migrations
 {
     public partial class Initial : Migration
     {
@@ -32,41 +32,24 @@ namespace PassAway.Migrations.Application
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rating",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Total = table.Column<double>(nullable: false),
-                    Voters = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rating", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Launched = table.Column<DateTime>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    RatingID = table.Column<int>(nullable: true),
+                    Produced = table.Column<DateTime>(nullable: false),
+                    Promotion = table.Column<bool>(nullable: false),
+                    Region = table.Column<string>(nullable: true),
                     Stock = table.Column<int>(nullable: false),
+                    Type = table.Column<string>(nullable: true),
                     URL = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Products_Rating_RatingID",
-                        column: x => x.RatingID,
-                        principalTable: "Rating",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,6 +79,27 @@ namespace PassAway.Migrations.Application
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Rating",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Amount = table.Column<double>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    ProductID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rating", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Rating_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CartItem_OrderID",
                 table: "CartItem",
@@ -107,9 +111,9 @@ namespace PassAway.Migrations.Application
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_RatingID",
-                table: "Products",
-                column: "RatingID");
+                name: "IX_Rating_ProductID",
+                table: "Rating",
+                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -118,13 +122,13 @@ namespace PassAway.Migrations.Application
                 name: "CartItem");
 
             migrationBuilder.DropTable(
+                name: "Rating");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Rating");
         }
     }
 }

@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 using PassAway.Models.Shared;
-
+using PassAway.Models.ViewModels;
 
 namespace PassAway.Controllers {
 
-    //[Authorize(Roles = "Admins")]
+    [Authorize(Roles = "Admins")]
     public class AdminProductController : Controller {
 
         private ProductRepository repository;
@@ -19,22 +19,25 @@ namespace PassAway.Controllers {
         }
 
 
-        public ViewResult Product() {
-            return View(repository.Products);
+        public ViewResult Create() {
+            return View(new CreateProductViewModel());
         }
 
-        public ViewResult EditProduct(int id) {
+        [HttpPost]
+        public IActionResult Create(CreateProductViewModel model) {
+
+        }
+
+
+
+        public ViewResult Edit(int id) {
             return View(repository.Products.FirstOrDefault(p => p.ID == id));
         }
             
 
         [HttpPost]
-        public IActionResult EditProduct(Product product) {
-            if (ModelState.IsValid) {
-                repository.SaveProduct(product);
-                TempData["message"] = $"{product.Name} has been saved";
-                return RedirectToAction("Index");
-            }
+        public IActionResult Edit(Product product) {
+           
             else {
                 // Here be dragons
                 return View(product);

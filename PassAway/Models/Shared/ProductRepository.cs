@@ -19,6 +19,7 @@ namespace PassAway.Models.Shared {
         public void SaveProduct(Product product) {
             if (product.ID == 0) {
                 context.Products.Add(product);
+
             } else {
                 Product dbEntry = context.Products.FirstOrDefault(p => p.ID == product.ID);
                 if (dbEntry != null) {
@@ -30,7 +31,6 @@ namespace PassAway.Models.Shared {
 
             context.SaveChanges();
         }
-
     }
 
 }

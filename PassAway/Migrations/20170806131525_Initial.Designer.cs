@@ -5,12 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using PassAway.Models.Shared;
 
-namespace PassAway.Migrations.Application
+namespace PassAway.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20170806131525_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -76,11 +77,15 @@ namespace PassAway.Migrations.Application
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("Total");
+                    b.Property<double>("Amount");
 
-                    b.Property<double>("Voters");
+                    b.Property<string>("Email");
+
+                    b.Property<int>("ProductID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ProductID");
 
                     b.ToTable("Rating");
                 });
@@ -90,22 +95,26 @@ namespace PassAway.Migrations.Application
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Launched");
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.Property<decimal>("Price");
 
-                    b.Property<int?>("RatingID");
+                    b.Property<DateTime>("Produced");
+
+                    b.Property<bool>("Promotion");
+
+                    b.Property<string>("Region");
 
                     b.Property<int>("Stock");
+
+                    b.Property<string>("Type");
 
                     b.Property<string>("URL");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("RatingID");
 
                     b.ToTable("Products");
                 });
@@ -121,11 +130,12 @@ namespace PassAway.Migrations.Application
                         .HasForeignKey("ProductID");
                 });
 
-            modelBuilder.Entity("PassAway.Models.Shared.Product", b =>
+            modelBuilder.Entity("PassAway.Models.Rating", b =>
                 {
-                    b.HasOne("PassAway.Models.Rating", "Rating")
-                        .WithMany()
-                        .HasForeignKey("RatingID");
+                    b.HasOne("PassAway.Models.Shared.Product")
+                        .WithMany("Ratings")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

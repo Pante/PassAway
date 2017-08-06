@@ -47,5 +47,8 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\AdminProduct\Create.cshtml" />
+  </ItemGroup>
 
 </Project>

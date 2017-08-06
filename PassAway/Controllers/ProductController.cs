@@ -13,23 +13,23 @@ namespace PassAway.Controllers {
     [AllowAnonymous]
     public class ProductController : Controller {
 
-        private ProductRepository repository;
+        private ProductRepository products;
         private int size;
 
 
-        public ProductController(ProductRepository repository, int size = 5) {
-            this.repository = repository;
+        public ProductController(ProductRepository products, int size = 5) {
+            this.products = products;
             this.size = 5;
         }
 
 
         public ViewResult List(int page = 1) {
-            Debug.WriteLine("COUNT: " + repository.Products.Count());
+            Debug.WriteLine("COUNT: " + products.Products.Count());
             return View(
                 new ProductsViewModel() {
-                    Products = repository.Products.OrderBy(product => product.ID).Skip((page - 1) * size).Take(size),
+                    Products = products.Products.OrderBy(product => product.ID).Skip((page - 1) * size).Take(size),
                     Pagination = new Pagination() {
-                        TotalItems = repository.Products.Count(),
+                        TotalItems = products.Products.Count(),
                         Current = page,
                         Size = size
                     }
