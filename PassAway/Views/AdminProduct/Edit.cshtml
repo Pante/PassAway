@@ -1,6 +1,7 @@
 ﻿@model EditProductViewModel
 
 <form asp-controller="AdminProduct" asp-action="EditProduct" method="post">
+    @Html.AntiForgeryToken()
     <div class="col-md-8" style="width:640px;">
         <input asp-for="ID" type="hidden" value="@Model.ID" />
         <h1>Edit Product: @Model.ID</h1>

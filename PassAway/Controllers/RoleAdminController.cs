@@ -35,6 +35,7 @@ namespace PassAway.Controllers {
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Required] string name) {
             if (ModelState.IsValid && await IsSuccessfulAsync(roles.CreateAsync(new IdentityRole(name)))) {
                  return RedirectToAction("Index");
@@ -45,6 +46,7 @@ namespace PassAway.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id) {
             var role = await Exists(roles.FindByIdAsync(id));
 
@@ -56,6 +58,8 @@ namespace PassAway.Controllers {
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id) {
             var role = await roles.FindByIdAsync(id);
             var members = new List<User>();
@@ -73,7 +77,9 @@ namespace PassAway.Controllers {
             });
         }
 
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(RoleModificationModel model) {
             if (ModelState.IsValid) {
 

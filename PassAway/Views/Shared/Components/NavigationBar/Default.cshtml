@@ -21,6 +21,7 @@
                     {
                         <a>
                             <form asp-controller="@item.Controller" asp-action="@item.Action" method="post">
+                                @Html.AntiForgeryToken()
                                 <input type="submit" value="@item.Name" style="border:hidden; background-color:hsl(0, 0%, 13%)"/>
                             </form>
                         </a>

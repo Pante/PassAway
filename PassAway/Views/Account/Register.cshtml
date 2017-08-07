@@ -1,6 +1,7 @@
 ﻿@model RegisterModel
 
 <form asp-action="Register" method="post">
+    @Html.AntiForgeryToken()
     <div class="form-group col-xs-12">
         <label asp-for="Email" for="inputEmail3" class="col-xs-2">Email</label>
         <input asp-for="Email" type="email" class="form-control col-xs-10" id="inputEmail3" placeholder="Email" required>

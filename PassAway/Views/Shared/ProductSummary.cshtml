@@ -39,6 +39,7 @@
         </div>
 
         <form asp-controller="Product" asp-action="PurchaseClick", method="post">
+            @Html.AntiForgeryToken()
             <input asp-for="ID" type="hidden" value="@Model.ID" />
             <div class="row">
                 <div class="col-md-12 content-right">

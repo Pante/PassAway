@@ -36,6 +36,7 @@ namespace PassAway.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateModel model) {
             if (ModelState.IsValid) {
                 var user = new User {
@@ -53,6 +54,7 @@ namespace PassAway.Controllers {
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, string email, string password) {
             var user = await users.FindByIdAsync(id);
             if (user != null) {
@@ -78,6 +80,7 @@ namespace PassAway.Controllers {
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id) {
             var user = await Exists(users.FindByIdAsync(id));
 

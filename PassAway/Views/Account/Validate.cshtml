@@ -1,7 +1,7 @@
 @model PasswordModel
 
 <form asp-action="Validate" method="post">
-
+    @Html.AntiForgeryToken()
     <div class="form-group col-xs-12">
         <label asp-for="Password" for="inputPassword3" class="col-xs-2">Password</label>
         <input asp-for="Password" type="password" class="form-control col-xs-10">

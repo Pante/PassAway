@@ -1,6 +1,7 @@
 @model PurchaseViewModel
 
 <form asp-controller="Product" asp-action="purchase" , method="post">
+    @Html.AntiForgeryToken()
     <input asp-for="ID" type="hidden" value="@Model.ID" />
 
     <div class="form-group">

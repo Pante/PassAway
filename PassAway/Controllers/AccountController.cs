@@ -115,6 +115,7 @@ namespace PassAway.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customers, Admins")]
         public async Task<IActionResult> Validate(PasswordModel model) {
             if (ModelState.IsValid) {

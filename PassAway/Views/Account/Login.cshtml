@@ -1,6 +1,7 @@
 ﻿@model LoginModel
 
 <form asp-action="Login" method="post">
+    @Html.AntiForgeryToken()
     <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
 
     <div class="form-group col-xs-12">
