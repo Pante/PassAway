@@ -21,7 +21,8 @@ namespace PassAway.Models.ViewModels {
                 new FormElementViewModel {Name = "Logout", Area = "", Controller = "Account", Action = "Logout", AllowedRoles = AUTHENTICATED },
                 new ElementViewModel { Name = "Edit Roles", Area = "", Controller = "RoleAdmin", Action = "Index", AllowedRoles = ADMINISTRATOR },
                 new ElementViewModel { Name = "Products", Area = "", Controller = "Product", Action = "List", AllowedRoles = ALL_ROLES},
-                new ElementViewModel { Name = "Edit Products", Area = "", Controller = "AdminProduct", Action = "Product", AllowedRoles = ADMINISTRATOR}
+                new ElementViewModel { Name = "Create Products", Area = "", Controller = "AdminProduct", Action = "Create", AllowedRoles = ADMINISTRATOR},
+                new ElementViewModel { Name = "Edit Products", Area = "", Controller = "AdminProduct", Action = "List", AllowedRoles = ADMINISTRATOR},
             };
         }
 

@@ -24,8 +24,12 @@ namespace PassAway.Models.Shared {
                 Product dbEntry = context.Products.FirstOrDefault(p => p.ID == product.ID);
                 if (dbEntry != null) {
                     dbEntry.Name = product.Name;
-                    dbEntry.Stock = product.Stock;
+                    dbEntry.Description = product.Description;
+                    dbEntry.URL = product.URL;
+                    dbEntry.Produced = product.Produced;
                     dbEntry.Price = product.Price;
+                    dbEntry.Stock = product.Stock;
+                    dbEntry.Promotion = product.Promotion;
                 }
             }
 

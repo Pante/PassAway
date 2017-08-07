@@ -1,0 +1,18 @@
+@model PurchaseViewModel
+
+<form asp-controller="Product" asp-action="purchase" , method="post">
+    <input asp-for="ID" type="hidden" value="@Model.ID" />
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">Quantity</label>
+        <div class="col-md-8">
+            <input asp-for="Quantity" class="form-control" type="text" value="@Model.Quantity">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 content-right">
+            <button class="btn btn-primary form-btn" type="submit">PURCHASE </button>
+        </div>
+    </div>
+</form>

@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace PassAway.Controllers {
 
-    [AllowAnonymous]
+    [Authorize(Roles = "Customers, Admins")]
     public class ProductController : Controller {
 
         private ProductRepository products;
@@ -24,10 +24,9 @@ namespace PassAway.Controllers {
 
 
         public ViewResult List(int page = 1) {
-            Debug.WriteLine("COUNT: " + products.Products.Count());
             return View(
                 new ProductsViewModel() {
-                    Products = products.Products.OrderBy(product => product.ID).Skip((page - 1) * size).Take(size),
+                    Products = products.Products.OrderBy(product => product.ID).Where(product => product.Stock > 0),
                     Pagination = new Pagination() {
                         TotalItems = products.Products.Count(),
                         Current = page,
@@ -35,6 +34,32 @@ namespace PassAway.Controllers {
                     }
                 }
             );
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult PurchaseClick(Product product) {
+            return View("~/Views/Product/Purchase.cshtml", new PurchaseViewModel() {
+                ID = product.ID.ToString(),
+                Quantity = "1"
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Purchase(PurchaseViewModel model) {
+            var product = products.Products.First(p => p.ID == int.Parse(model.ID));
+            var quantityValid = int.TryParse(model.Quantity, out int quantity);
+
+            if (product != null && product.Stock >= quantity) {
+                product.Stock -= quantity;
+                products.SaveProduct(product);
+                return RedirectToAction("Index", "Home");
+
+            } else {
+                return View(model);
+            }
         }
 
     }

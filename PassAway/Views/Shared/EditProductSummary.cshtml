@@ -1,0 +1,51 @@
+@model Product
+
+<div class="row product-list">
+
+    <div class="col-md-4 col-sm-6 product-item">
+
+        <div class="product-container">
+
+            <div class="col-md-12">
+                <img src="@Model.URL" />
+            </div>
+
+            <div class="col-xs-8">
+                <h2>@Model.Name</h2>
+            </div>
+            <div class="col-xs-4"><a href="#" class="small-text">@Model.ID</a></div>
+
+            <div class="col-xs-12">
+                <p>@Model.Description</p>
+
+                <div class="col-xs-6">
+                    <label>Stock </label>
+                    <p>@Model.Stock</p>
+                </div>
+
+                <div class="col-xs-6">
+                    <label>Price</label>
+                    <p class="product-price">@Model.Price.ToString("c")</p>
+                </div>
+
+
+                @if (@Model.Promotion) {
+                    <div class="col-xs-6">
+                        <p class="product-price">Promotional</p>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        <form asp-controller="AdminProduct" asp-action="Edit" , method="post">
+            <input asp-for="ID" type="hidden" value="@Model.ID" />
+            <div class="row">
+                <div class="col-md-12 content-right">
+                    <button class="btn btn-primary form-btn" type="submit">EDIT </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

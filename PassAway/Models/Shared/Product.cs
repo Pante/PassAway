@@ -31,7 +31,13 @@ namespace PassAway.Models.Shared {
 
 
         public double GetProductRating() {
-            return Ratings.Sum(rating => rating.Amount) / Ratings.Count();
+            if (Ratings.Count != 0) {
+                return Ratings.Sum(rating => rating.Amount) / Ratings.Count;
+
+            } else {
+                return 0;
+            }
+            
         }
 
     }

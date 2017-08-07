@@ -1,0 +1,7 @@
+﻿@model ProductsViewModel
+
+@foreach (var item in Model.Products) {
+    @Html.Partial("ProductSummary", item)
+}
+
+<div page-model="@Model.Pagination" page-action="List"></div>

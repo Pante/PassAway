@@ -8,8 +8,6 @@ namespace PassAway.Models.ViewModels {
 
     public class CreateProductViewModel {
 
-        public string ID { get; set; }
-
         [Required(ErrorMessage = "Please enter a product name")]
         public string Name { get; set; }
         public string Description { get; set; }
